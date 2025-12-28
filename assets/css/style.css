@@ -1,0 +1,15 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 10px;
+}
+
+header nav a {
+  margin-right: 10px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+article {
+  margin-bottom: 20px;
+}
