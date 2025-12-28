@@ -32,3 +32,4 @@ fetch('/data/posts.json')
       container.innerHTML += html;
     });
   });
+posts.sort((a, b) => new Date(b.lastDate) - new Date(a.lastDate));
