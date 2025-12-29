@@ -1,17 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Category</title>
+  <meta charset="UTF-8" />
+  <title>Category – FastNews</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- ✅ ABSOLUTE PATH CSS -->
+  <link rel="stylesheet" href="/assets/css/style.css">
 </head>
+
 <body>
 
+<!-- GLOBAL HEADER -->
 <div id="header"></div>
-<h1>Category News</h1>
-<div id="list"></div>
+
+<main class="container">
+
+  <h1 id="categoryTitle" class="page-title"></h1>
+
+  <div id="categoryPosts" class="post-list">
+    <!-- JS se posts aayenge -->
+  </div>
+
+</main>
+
+<!-- GLOBAL FOOTER -->
 <div id="footer"></div>
 
+<!-- ✅ GLOBAL JS (ABSOLUTE PATH) -->
 <script defer src="/assets/js/include.js"></script>
+<script defer src="/assets/js/category.js"></script>
 <script defer src="/assets/js/main.js"></script>
 <script defer src="/assets/js/search.js"></script>
+
 </body>
 </html>

@@ -340,3 +340,46 @@ padding: 10px;
   text-align: center;
   line-height: 20px;
 }
+
+/* =========================
+   CATEGORY / TAG PAGE
+========================= */
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 12px;
+}
+
+.page-title {
+  font-size: 24px;
+  margin-bottom: 16px;
+  font-weight: bold;
+}
+
+.post-card {
+  background: #fff;
+  padding: 14px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.06);
+}
+
+.post-card h2 {
+  font-size: 18px;
+  margin: 0 0 6px;
+}
+
+.post-card a {
+  text-decoration: none;
+  color: #111;
+}
+
+.post-card a:hover {
+  color: #198754;
+}
+
+.meta {
+  font-size: 13px;
+  color: #666;
+}
