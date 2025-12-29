@@ -214,6 +214,10 @@ padding: 10px;
   color: #198754;
 }
 
+.header-left .logo {
+  display: none;
+}
+
 .header-right {
   display: flex;
   align-items: center;
