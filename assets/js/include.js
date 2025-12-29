@@ -1,7 +1,15 @@
-fetch('/partials/header.html')
-  .then(r => r.text())
-  .then(d => document.getElementById('header').innerHTML = d);
+async function loadPartials() {
+  const headerRes = await fetch('/partials/header.html');
+  const headerHTML = await headerRes.text();
+  document.getElementById('header').innerHTML = headerHTML;
 
-fetch('/partials/footer.html')
-  .then(r => r.text())
-  .then(d => document.getElementById('footer').innerHTML = d);
+  const footerRes = await fetch('/partials/footer.html');
+  const footerHTML = await footerRes.text();
+  document.getElementById('footer').innerHTML = footerHTML;
+
+  // 🔥 header load hone ke baad menu + search init
+  initMenu();
+  initSearch();
+}
+
+loadPartials();

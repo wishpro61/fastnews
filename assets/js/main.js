@@ -1,18 +1,31 @@
-// H1 only on homepage
-const titleEl = document.querySelector('[data-home-title]');
-if (titleEl) {
-  if (location.pathname === '/' || location.pathname === '/index.html') {
-    const h1 = document.createElement('h1');
-    h1.className = 'site-title';
-    h1.innerText = titleEl.innerText;
-    titleEl.replaceWith(h1);
+/* ===============================
+   H1 ONLY ON HOMEPAGE (SEO SAFE)
+================================ */
+document.addEventListener("DOMContentLoaded", () => {
+  const titleEl = document.querySelector('[data-home-title]');
+  if (titleEl) {
+    if (location.pathname === '/' || location.pathname === '/index.html') {
+      const h1 = document.createElement('h1');
+      h1.className = 'site-title';
+      h1.innerText = titleEl.innerText;
+      titleEl.replaceWith(h1);
+    }
   }
-}
+});
 
+/* ===============================
+   HOMEPAGE POSTS LOAD
+================================ */
 fetch('/data/posts.json')
   .then(res => res.json())
   .then(posts => {
+
+    // 🔥 Latest post first
+    posts.sort((a, b) => new Date(b.lastDate) - new Date(a.lastDate));
+
     const container = document.getElementById('homeCategories');
+    if (!container) return;
+
     const grouped = {};
 
     posts.forEach(p => {
@@ -29,30 +42,43 @@ fetch('/data/posts.json')
       grouped[cat].slice(0, 5).forEach(post => {
         html += `
           <div class="post">
-            <h4><a href="${post.url}">${post.title}</a></h4>
-            <div class="meta">🟢 ${post.status} • Last Date: ${post.lastDate}</div>
+            <h4>
+              <a href="${post.url}">${post.title}</a>
+            </h4>
+            <div class="meta">
+              🟢 ${post.status} • Last Date: ${post.lastDate}
+            </div>
           </div>
         `;
       });
 
       html += `
-          <a class="read-more" href="/category.html?cat=${cat}">Read More →</a>
+          <a class="read-more" href="/category.html?cat=${cat}">
+            Read More →
+          </a>
         </div>
       `;
 
       container.innerHTML += html;
     });
   });
-posts.sort((a, b) => new Date(b.lastDate) - new Date(a.lastDate));
 
-const menuBtn = document.getElementById("menuBtn");
-const mobileMenu = document.getElementById("mobileMenu");
-const closeMenu = document.getElementById("closeMenu");
+/* ===============================
+   MOBILE MENU INIT
+   (called from include.js)
+================================ */
+function initMenu() {
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const closeMenu = document.getElementById('closeMenu');
 
-menuBtn?.addEventListener("click", () => {
-  mobileMenu.classList.add("show");
-});
+  if (!menuBtn || !mobileMenu || !closeMenu) return;
 
-closeMenu?.addEventListener("click", () => {
-  mobileMenu.classList.remove("show");
-});
+  menuBtn.addEventListener('click', () => {
+    mobileMenu.classList.add('show');
+  });
+
+  closeMenu.addEventListener('click', () => {
+    mobileMenu.classList.remove('show');
+  });
+}

@@ -1,11 +1,14 @@
-const searchInput = document.getElementById("siteSearch");
+function initSearch() {
+  const searchInput = document.getElementById('siteSearch');
+  if (!searchInput) return;
 
-if (searchInput) {
-  searchInput.addEventListener("input", async (e) => {
-    const q = e.target.value.toLowerCase();
+  searchInput.addEventListener('keydown', async (e) => {
+    if (e.key !== 'Enter') return;
+
+    const q = searchInput.value.toLowerCase().trim();
     if (q.length < 2) return;
 
-    const res = await fetch("/data/posts.json");
+    const res = await fetch('/data/posts.json');
     const posts = await res.json();
 
     const found = posts.find(p =>
@@ -13,8 +16,6 @@ if (searchInput) {
       p.category.toLowerCase().includes(q)
     );
 
-    if (found) {
-      window.location.href = found.url;
-    }
+    if (found) window.location.href = found.url;
   });
 }
