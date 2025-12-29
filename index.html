@@ -1,18 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<base href="/" />
+  <base href="/" />
   <meta charset="UTF-8" />
   <title>FastNews – Latest Updates</title>
+
+  <!-- ✅ FIXED META -->
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- ✅ FIXED CSS LINK -->
   <link rel="stylesheet" href="/assets/css/style.css" />
+
+  <!-- JS -->
   <script defer src="/assets/js/include.js"></script>
-<script defer src="/assets/js/search.js"></script>
+  <script defer src="/assets/js/search.js"></script>
   <script defer src="/assets/js/main.js"></script>
 </head>
+
 <body>
 
+<!-- HEADER -->
 <div id="header"></div>
+
+<!-- ===== AD POPUP ===== -->
+<div class="ad-overlay" id="adBox">
+  <div class="ad-card">
+
+    <a href="https://adssettings.google.com/whythisad"
+       target="_blank"
+       class="ad-info">i</a>
+
+    <h2>Fast Internet, Low Prices</h2>
+
+    <p>
+      Upgrade to superfast WiFi for your home.
+      No buffering, just seamless browsing.
+    </p>
+
+    <span class="brand">Tripleplay Broadband</span>
+
+    <a href="https://www.tripleplay.in/broadband-internet-connection/"
+       target="_blank"
+       class="ad-btn">
+      Book Now →
+    </a>
+
+  </div>
+</div>
 
 <!-- JOIN BOX -->
 <section class="join-box">
@@ -31,7 +65,25 @@
   <!-- JS se data aayega -->
 </main>
 
+<!-- FOOTER -->
 <div id="footer"></div>
+
+<!-- ===== AD JS ===== -->
+<script>
+const ad = document.getElementById("adBox");
+
+/* show after 2 sec */
+setTimeout(() => {
+  ad.style.display = "flex";
+}, 2000);
+
+/* close on overlay click */
+ad.addEventListener("click", e => {
+  if (e.target === ad) {
+    ad.style.display = "none";
+  }
+});
+</script>
 
 </body>
 </html>

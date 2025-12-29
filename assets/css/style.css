@@ -274,3 +274,69 @@ padding: 10px;
   margin-top: 20px;
   font-size: 13px;
 }
+
+/* ===== Ad Overlay ===== */
+.ad-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.ad-card {
+  background: #fff;
+  width: 90%;
+  max-width: 420px;
+  padding: 22px;
+  border-radius: 14px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0,0,0,.3);
+  animation: fadeUp .4s ease;
+}
+
+@keyframes fadeUp {
+  from {opacity:0; transform: translateY(20px);}
+  to {opacity:1; transform: translateY(0);}
+}
+
+.ad-card h2 {
+  font-size: 22px;
+}
+
+.ad-card p {
+  font-size: 14px;
+  color: #555;
+}
+
+.brand {
+  display: block;
+  font-size: 13px;
+  color: #888;
+  margin: 12px 0;
+}
+
+.ad-btn {
+  display: block;
+  text-align: center;
+  background: #2f3f46;
+  color: #fff;
+  padding: 14px;
+  border-radius: 30px;
+  text-decoration: none;
+}
+
+.ad-info {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid #999;
+  font-size: 12px;
+  text-align: center;
+  line-height: 20px;
+}
