@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin Panel - Post Publisher</title>
+<link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+<h2>Create New Post</h2>
+
+<label>Title:</label>
+<input type="text" id="title" placeholder="Post Title">
+
+<label>Description:</label>
+<textarea id="description" placeholder="Meta Description"></textarea>
+
+<label>Slug (optional):</label>
+<input type="text" id="slug" placeholder="free-laptop-yojana">
+
+<label>Feature Image URL:</label>
+<input type="text" id="image" placeholder="/assets/images/news/free-laptop.jpg">
+
+<label>Apply Link:</label>
+<input type="text" id="apply_link" placeholder="#">
+
+<label>Content (Markdown):</label>
+<textarea id="content" rows="10" placeholder="## Eligibility ..."></textarea>
+
+<button id="preview">Preview</button>
+<button id="publish">Publish</button>
+
+<script src="editor.js"></script>
+<script src="publish.js"></script>
+</body>
+</html>
