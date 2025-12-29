@@ -98,6 +98,14 @@ a { text-decoration: none; color: inherit; }
   margin-bottom: 12px;
 }
 
+.post-image {
+  width: 100%;       /* screen width ke hisab se */
+  max-width: 800px;  /* max size */
+  height: auto;
+  margin: 0 auto;
+padding: 10px;
+}
+
 .apply-btn {
   display: block;
   background: #198754;
