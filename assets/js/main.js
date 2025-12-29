@@ -1,3 +1,14 @@
+// H1 only on homepage
+const titleEl = document.querySelector('[data-home-title]');
+if (titleEl) {
+  if (location.pathname === '/' || location.pathname === '/index.html') {
+    const h1 = document.createElement('h1');
+    h1.className = 'site-title';
+    h1.innerText = titleEl.innerText;
+    titleEl.replaceWith(h1);
+  }
+}
+
 fetch('/data/posts.json')
   .then(res => res.json())
   .then(posts => {
@@ -33,3 +44,15 @@ fetch('/data/posts.json')
     });
   });
 posts.sort((a, b) => new Date(b.lastDate) - new Date(a.lastDate));
+
+const menuBtn = document.getElementById("menuBtn");
+const mobileMenu = document.getElementById("mobileMenu");
+const closeMenu = document.getElementById("closeMenu");
+
+menuBtn?.addEventListener("click", () => {
+  mobileMenu.classList.add("show");
+});
+
+closeMenu?.addEventListener("click", () => {
+  mobileMenu.classList.remove("show");
+});

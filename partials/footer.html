@@ -1,4 +1,7 @@
-<hr>
-<footer>
-  <p>© 2025 FastNews India</p>
+<footer class="site-footer">
+  <p>© <span id="year"></span> FastNews. All Rights Reserved.</p>
 </footer>
+
+<script>
+  document.getElementById("year").innerText = new Date().getFullYear();
+</script>
