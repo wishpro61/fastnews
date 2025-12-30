@@ -82,3 +82,18 @@ function initMenu() {
     mobileMenu.classList.remove('show');
   });
 }
+/*===============================
+comon area about 
+==============================*/
+function load(id, file) {
+  fetch(file)
+    .then(res => res.text())
+    .then(data => {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = data;
+    });
+}
+
+load("header", "/header.html");
+load("common-section", "/common-section.html");
+load("footer", "/footer.html");
