@@ -98,18 +98,28 @@ load("header", "/header.html");
 load("common-section", "/common-section.html");
 load("footer", "/footer.html");
 
-// ===== GLOBAL TAG RENDER =====
-function renderPostTags(tags) {
-  const tagBox = document.querySelector("[data-post-tags]");
-  if (!tagBox || !Array.isArray(tags) || !tags.length) return;
+// ========== GLOBAL TAG RENDER ==========
+(function () {
+  const box = document.querySelector(".post-tags[data-tags]");
+  if (!box) return;
 
-  tagBox.innerHTML = "";
+  const raw = box.getAttribute("data-tags");
+  if (!raw) return;
+
+  const tags = raw.split(",").map(t => t.trim());
+
+  box.innerHTML = "";
 
   tags.forEach(tag => {
+    const slug = tag
+      .toLowerCase()
+      .replace(/\s+/g, "-");
+
     const a = document.createElement("a");
-    a.href = `/tag/${tag}/`;
+    a.href = `/tag/${slug}/`;
     a.className = "tag-chip";
     a.textContent = `#${tag}`;
-    tagBox.appendChild(a);
+
+    box.appendChild(a);
   });
-}
+})();
