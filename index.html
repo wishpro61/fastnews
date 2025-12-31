@@ -72,17 +72,19 @@
 <script>
 const ad = document.getElementById("adBox");
 
-/* show after 2 sec */
-setTimeout(() => {
-  ad.style.display = "flex";
-}, 2000);
+if (ad) {
+  /* show after 2 sec */
+  setTimeout(() => {
+    ad.style.display = "flex";
+  }, 2000);
 
-/* close on overlay click */
-ad.addEventListener("click", e => {
-  if (e.target === ad) {
-    ad.style.display = "none";
-  }
-});
+  /* close on overlay click */
+  ad.addEventListener("click", e => {
+    if (e.target === ad) {
+      ad.style.display = "none";
+    }
+  });
+}
 </script>
 
 </body>
