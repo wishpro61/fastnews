@@ -8,7 +8,7 @@
         class="site-logo"
       />
 
-      <!-- Site Title (H1 only on homepage) -->
+      <!-- Site Title -->
       <span class="site-title" data-home-title>
         FastNews
       </span>
@@ -19,7 +19,7 @@
     <input
       type="search"
       id="siteSearch"
-      placeholder="Search jobs..."
+      placeholder="Search jobs and news..."
       aria-label="Search jobs and news"
     />
 
@@ -31,9 +31,13 @@
 
 <nav id="mobileMenu" class="mobile-menu">
   <button id="closeMenu" aria-label="Close Menu">✖</button>
+
   <a href="/">Home</a>
-  <a href="/category.html?cat=bank jobs">Bank Jobs</a>
-  <a href="/category.html?cat=india">India</a>
-  <a href="/category.html?cat=science">Science</a>
+
+  <!-- ✅ SEO Friendly Category URLs -->
+  <a href="/category/bank-jobs/">Bank Jobs</a>
+  <a href="/category/india/">India</a>
+  <a href="/category/science/">Science</a>
+
   <a href="/about.html">About</a>
 </nav>

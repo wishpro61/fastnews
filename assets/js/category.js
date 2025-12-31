@@ -1,11 +1,19 @@
-const params = new URLSearchParams(window.location.search);
-const cat = params.get("cat");
+// URL se category slug nikalo
+// /category/technology  → technology
+function getCategorySlug() {
+  const parts = window.location.pathname.split("/");
+  return parts[2] || null;
+}
+
+const cat = getCategorySlug();
 
 const titleEl = document.getElementById("categoryTitle");
 const container = document.getElementById("categoryPosts");
 
-if (cat) {
-  titleEl.innerText = cat.toUpperCase();
+if (!cat) {
+  container.innerHTML = "<p>Category not found.</p>";
+} else {
+  titleEl.innerText = cat.replace(/-/g, " ").toUpperCase();
 
   fetch("/data/posts.json")
     .then(res => res.json())
@@ -16,6 +24,8 @@ if (cat) {
         container.innerHTML = "<p>No posts found.</p>";
         return;
       }
+
+      container.innerHTML = "";
 
       filtered.forEach(post => {
         container.innerHTML += `
@@ -29,5 +39,9 @@ if (cat) {
           </article>
         `;
       });
+    })
+    .catch(err => {
+      console.error(err);
+      container.innerHTML = "<p>Error loading posts.</p>";
     });
 }
