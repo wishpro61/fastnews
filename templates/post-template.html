@@ -1,10 +1,17 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-<meta charset="UTF-8">
-<title>{{TITLE}}</title>
-<meta name="description" content="{{DESCRIPTION}}">
-<link rel="stylesheet" href="/assets/css/style.css">
+  <meta charset="UTF-8">
+  <title>{{TITLE}}</title>
+
+  <meta name="description" content="{{DESCRIPTION}}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="/assets/css/style.css">
+
+  <!-- GLOBAL JS -->
+  <script defer src="/assets/js/include.js"></script>
+  <script defer src="/assets/js/main.js"></script>
 </head>
 <body>
 
@@ -12,9 +19,24 @@
 
 <main class="post-container">
   <h1 class="post-title">{{H1}}</h1>
-  <img src="{{IMAGE}}" alt="{{IMAGE_ALT}}" class="post-image">
-  <a class="apply-btn" href="{{APPLY_LINK}}">{{APPLY_TEXT}}</a>
-  <article class="post-content">{{CONTENT}}</article>
+
+  <img
+    src="{{IMAGE}}"
+    alt="{{IMAGE_ALT}}"
+    class="post-image"
+  >
+
+  <a class="apply-btn" href="{{APPLY_LINK}}">
+    {{APPLY_TEXT}}
+  </a>
+
+  <article class="post-content">
+    {{CONTENT}}
+  </article>
+
+  <!-- ✅ GLOBAL TAG PLACEHOLDER (ONE LINE ONLY) -->
+  <div class="post-tags" data-post-tags></div>
+
 </main>
 
 <div id="footer"></div>

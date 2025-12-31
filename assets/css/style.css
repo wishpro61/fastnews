@@ -435,3 +435,34 @@ comon area about
   color: #333;
   text-decoration: none;
 }
+
+/*================
+tag 3d
+===============*/
+.post-tags {
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tag-chip {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 999px;
+  background: linear-gradient(145deg, #ffffff, #e5e5e5);
+  box-shadow:
+    4px 4px 8px rgba(0,0,0,0.18),
+   -4px -4px 8px rgba(255,255,255,0.9);
+  color: #333;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.tag-chip:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    6px 6px 12px rgba(0,0,0,0.22),
+   -6px -6px 12px rgba(255,255,255,1);
+}

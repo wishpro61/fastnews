@@ -97,3 +97,19 @@ function load(id, file) {
 load("header", "/header.html");
 load("common-section", "/common-section.html");
 load("footer", "/footer.html");
+
+// ===== GLOBAL TAG RENDER =====
+function renderPostTags(tags) {
+  const tagBox = document.querySelector("[data-post-tags]");
+  if (!tagBox || !Array.isArray(tags) || !tags.length) return;
+
+  tagBox.innerHTML = "";
+
+  tags.forEach(tag => {
+    const a = document.createElement("a");
+    a.href = `/tag/${tag}/`;
+    a.className = "tag-chip";
+    a.textContent = `#${tag}`;
+    tagBox.appendChild(a);
+  });
+}
