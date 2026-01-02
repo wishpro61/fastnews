@@ -21,6 +21,24 @@
 <!-- HEADER -->
 <div id="header"></div>
 
+<!-- Top bar -->
+<div id="topMessage" style="
+    display:none; 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    background:#111; 
+    color:#fff; 
+    padding:12px; 
+    text-align:center; 
+    font-weight:bold;
+    z-index: 9999;
+    font-family: Arial, sans-serif;
+">
+  इनाम प्राप्त करने के लिए यहां<span id="timeSpent">20</span> second रूकें
+</div>
+
 <!-- ===== AD POPUP ===== -->
 <div class="ad-overlay" id="adBox">
   <div class="ad-card">
@@ -84,6 +102,39 @@ if (ad) {
     }
   });
 }
+</script>
+
+<script>
+  // Check if user came from https://dirtypush.com
+  const params = new URLSearchParams(window.location.search);
+  const fromA = params.get("from") === "dirtypush";
+  const cameFromDirtypush = document.referrer.includes("dirtypush.com");
+
+  if (fromA && cameFromDirtypush) {
+    const topMessage = document.getElementById("topMessage");
+    topMessage.style.display = "block"; // show bar
+
+    const storageKey = "dirtypush_timer_seconds";
+    let seconds = parseInt(localStorage.getItem(storageKey)) || 0;
+
+    // Update timer every second
+    const updateTimer = () => {
+      seconds++;
+      localStorage.setItem(storageKey, seconds);
+      document.getElementById("timeSpent").innerText = seconds;
+
+      if (seconds >= 20) { // 20 seconds
+        topMessage.innerHTML = "🎉 आपने 20 सेकंड पूरा कर लिया! इनाम प्राप्त करें!";
+        clearInterval(timerInterval);
+      }
+    };
+
+    // Show current seconds immediately
+    document.getElementById("timeSpent").innerText = seconds;
+
+    // Start interval
+    const timerInterval = setInterval(updateTimer, 1000);
+  }
 </script>
 
 </body>
