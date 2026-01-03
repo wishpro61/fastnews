@@ -19,9 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
 ================================ */
 async function loadPartials() {
   const partials = [
-    { id: "header", file: "./partials/header.html" },
-    { id: "common-section", file: "./partials/common-section.html" },
-    { id: "footer", file: "./partials/footer.html" }
+    { id: "header", file: "/partials/header.html" },
+    { id: "common-section", file: "/partials/common-section.html" },
+    { id: "footer", file: "/partials/footer.html" }
   ];
 
   for (const p of partials) {
@@ -49,8 +49,11 @@ loadPartials();
 /* ===============================
    HOMEPAGE POSTS LOAD
 ================================ */
-fetch('./data/posts.json')
-  .then(res => res.json())
+fetch('/data/posts.json')
+  .then(res => {
+    if (!res.ok) throw new Error(`HTTP error ${res.status}`);
+    return res.json();
+  })
   .then(posts => {
 
     // Latest post first
