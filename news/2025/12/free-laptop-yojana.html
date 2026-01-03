@@ -7,34 +7,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="फ्री लैपटॉप योजना आवेदन शुरू – पात्रता, दस्तावेज, ऑनलाइन आवेदन प्रक्रिया और अंतिम तिथि की पूरी जानकारी।">
 
+  <!-- CSS -->
   <link rel="stylesheet" href="/assets/css/style.css">
+
+  <!-- JS -->
   <script defer src="/assets/js/include.js"></script>
+  <script defer src="/assets/js/main.js"></script>
+  <script defer src="/assets/js/search.js"></script>
 </head>
 <body>
 
+<!-- HEADER -->
 <div id="header"></div>
 
+<!-- MAIN POST CONTENT -->
 <main class="post-container">
 
   <!-- TITLE -->
   <h1 class="post-title">
     फ्री लैपटॉप योजना आवेदन शुरू – ऑनलाइन रजिस्ट्रेशन
   </h1>
-<!-- JOIN BOX -->
-<section class="join-box">
-  <div class="join whatsapp">
-    <span>Join WhatsApp</span>
-    <a href="https://whatsapp.com/channel/0029VaSQUV" class="btn green">Join Now</a>
-  </div>
-  <div class="join telegram">
-    <span>Join Telegram</span>
-    <a href="#" class="btn blue">Join Now</a>
-  </div>
-</section>
-<!-- POST IMAGE -->
-<img src="/assets/images/news/free-laptop.jpg" 
-     alt="फ्री लैपटॉप योजना 2025" 
-     class="post-image">
+
+  <!-- JOIN BOX -->
+  <section class="join-box">
+    <div class="join whatsapp">
+      <span>Join WhatsApp</span>
+      <a href="https://whatsapp.com/channel/0029VaSQUV" class="btn green">Join Now</a>
+    </div>
+    <div class="join telegram">
+      <span>Join Telegram</span>
+      <a href="#" class="btn blue">Join Now</a>
+    </div>
+  </section>
+
+  <!-- POST IMAGE -->
+  <img src="/assets/images/news/free-laptop.jpg" 
+       alt="फ्री लैपटॉप योजना 2025" 
+       class="post-image">
 
   <!-- APPLY BUTTON -->
   <a class="apply-btn" href="#" target="_blank">
@@ -140,19 +149,40 @@
     <a href="#">फ्री टैबलेट योजना आवेदन शुरू</a>
     <a href="#">छात्रवृत्ति योजना 2025 ऑनलाइन फॉर्म</a>
   </section>
-<!-- TAGS (AUTHOR INPUT) -->
-<div class="post-tags"
-     data-tags="free, laptop, yojana, school">
-</div>
-<!-- TAGS -->
-<div class="post-tags" data-post-tags></div>
+
+  <!-- TAGS (AUTHOR INPUT) -->
+  <div class="post-tags" data-tags="free, laptop, yojana, school"></div>
+
 </main>
+
+<!-- COMMON SECTION -->
 <div id="common-section"></div>
+
+<!-- FOOTER -->
 <div id="footer"></div>
 
-<script defer src="/assets/js/include.js"></script>
-<script defer src="/assets/js/main.js"></script>
-<script defer src="/assets/js/search.js"></script>
+<!-- ================= JS ================= -->
+<script>
+  // Load partials with absolute paths
+  async function loadPartials() {
+    try {
+      const headerRes = await fetch('/partials/header.html');
+      if (headerRes.ok) document.getElementById('header').innerHTML = await headerRes.text();
+
+      const commonRes = await fetch('/partials/common-section.html');
+      if (commonRes.ok) document.getElementById('common-section').innerHTML = await commonRes.text();
+
+      const footerRes = await fetch('/partials/footer.html');
+      if (footerRes.ok) document.getElementById('footer').innerHTML = await footerRes.text();
+
+      if (typeof initMenu === "function") initMenu();
+      if (typeof initSearch === "function") initSearch();
+    } catch (err) {
+      console.error("Partial load error:", err);
+    }
+  }
+  loadPartials();
+</script>
 
 </body>
 </html>
