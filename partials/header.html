@@ -1,43 +1,72 @@
 <header class="site-header">
   <div class="header-left">
-    <a href="/" class="logo-wrap">
+    <a href="/" class="logo-wrap" aria-label="Ncertcollege Home">
+      
       <!-- Logo Image -->
       <img
         src="/assets/images/logo.png"
-        alt="FastNews - Latest Government Jobs and News"
+        alt="FastNews - Government Schemes, Jobs, Education & Technology News"
         class="site-logo"
+        width="180"
+        height="40"
+        loading="eager"
       />
 
-      <!-- Site Title -->
+      <!-- Site Title (H1 only on homepage via JS) -->
       <span class="site-title" data-home-title>
-        FastNews
+        Ncertcollege
       </span>
     </a>
   </div>
 
   <div class="header-right">
+    <!-- Search -->
     <input
       type="search"
       id="siteSearch"
-      placeholder="Search jobs and news..."
-      aria-label="Search jobs and news"
+      placeholder="Search news, jobs, yojana..."
+      aria-label="Search on Ncertcollege"
+      autocomplete="off"
     />
 
-    <button id="menuBtn" class="menu-btn" aria-label="Open Menu">
+    <!-- Mobile Menu Button -->
+    <button
+      id="menuBtn"
+      class="menu-btn"
+      aria-label="Open Menu"
+      type="button"
+    >
       ☰
     </button>
   </div>
 </header>
 
-<nav id="mobileMenu" class="mobile-menu">
-  <button id="closeMenu" aria-label="Close Menu">✖</button>
+<!-- ================= MOBILE MENU ================= -->
+<nav
+  id="mobileMenu"
+  class="mobile-menu"
+  aria-label="Primary Navigation"
+>
+  <button
+    id="closeMenu"
+    class="close-menu"
+    aria-label="Close Menu"
+    type="button"
+  >
+    ✖
+  </button>
 
+  <!-- Home -->
   <a href="/">Home</a>
 
-  <!-- ✅ SEO Friendly Category URLs -->
-  <a href="/category/bank-jobs/">Bank Jobs</a>
-  <a href="/category/india/">India</a>
-  <a href="/category/science/">Science</a>
+  <!-- ✅ FINAL SEO FRIENDLY CATEGORIES -->
+  <a href="/sarkari-yojana/">सरकारी योजनाएं</a>
+  <a href="/education/">शिक्षा अपडेट</a>
+  <a href="/jobs-career/">सरकारी नौकरी & करियर</a>
+  <a href="/health-tips/">स्वास्थ्य टिप्स</a>
+  <a href="/technology/">टेक्नोलॉजी न्यूज़</a>
 
+  <!-- Static Pages -->
   <a href="/about.html">About</a>
+  <a href="/contact.html">Contact</a>
 </nav>

@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
   <base href="/" />
   <meta charset="UTF-8" />
-  <title>FastNews – Latest Updates</title>
 
-  <!-- ✅ FIXED META -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NcertCollege – सरकारी योजनाएं, नौकरियां और शिक्षा अपडेट</title>
+
+  <!-- ✅ SEO META -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="NcertCollege पर पढ़ें सरकारी योजनाएं, शिक्षा अपडेट, सरकारी नौकरी, स्वास्थ्य टिप्स और टेक्नोलॉजी न्यूज़ – सबसे पहले और सटीक जानकारी।" />
 
   <!-- ✅ CSS -->
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/style.css" />
 
   <!-- ✅ JS -->
   <script defer src="/assets/js/include.js"></script>
@@ -21,50 +23,6 @@
 
 <!-- ================= HEADER ================= -->
 <div id="header"></div>
-
-<!-- ================= TOP MESSAGE ================= -->
-<div id="topMessage" style="
-  display:none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background:#111;
-  color:#fff;
-  padding:12px;
-  text-align:center;
-  font-weight:bold;
-  z-index: 9999;
-  font-family: Arial, sans-serif;
-">
-  इनाम प्राप्त करने के लिए यहां <span id="timeSpent">0</span> सेकंड रुकें
-</div>
-
-<!-- ================= AD POPUP ================= -->
-<div class="ad-overlay" id="adBox">
-  <div class="ad-card">
-
-    <a href="https://adssettings.google.com/whythisad"
-       target="_blank"
-       class="ad-info">i</a>
-
-    <h2>Fast Internet, Low Prices</h2>
-
-    <p>
-      Upgrade to superfast WiFi for your home.
-      No buffering, just seamless browsing.
-    </p>
-
-    <span class="brand">Tripleplay Broadband</span>
-
-    <a href="https://www.tripleplay.in/broadband-internet-connection/"
-       target="_blank"
-       class="ad-btn">
-      Book Now →
-    </a>
-
-  </div>
-</div>
 
 <!-- ================= JOIN BOX ================= -->
 <section class="join-box">
@@ -83,9 +41,9 @@
   </div>
 </section>
 
-<!-- ================= CATEGORY GRID ================= -->
+<!-- ================= HOMEPAGE CATEGORIES ================= -->
 <main class="container" id="homeCategories">
-  <!-- JS se data aayega -->
+  <!-- Categories + posts yahin JS se auto load honge -->
 </main>
 
 <!-- ================= COMMON SECTION ================= -->
@@ -93,53 +51,6 @@
 
 <!-- ================= FOOTER ================= -->
 <div id="footer"></div>
-
-<!-- ================= AD JS ================= -->
-<script>
-const ad = document.getElementById("adBox");
-
-if (ad) {
-  setTimeout(() => {
-    ad.style.display = "flex";
-  }, 2000);
-
-  ad.addEventListener("click", e => {
-    if (e.target === ad) {
-      ad.style.display = "none";
-    }
-  });
-}
-</script>
-
-<!-- ================= TIMER + REFERRER ================= -->
-<script>
-const params = new URLSearchParams(window.location.search);
-const fromA = params.get("from") === "dirtypush";
-const cameFromDirtypush = document.referrer.includes("dirtypush");
-
-if (fromA && cameFromDirtypush) {
-  const topMessage = document.getElementById("topMessage");
-  const timeSpan = document.getElementById("timeSpent");
-
-  topMessage.style.display = "block";
-
-  const storageKey = "dirtypush_timer_seconds";
-  let seconds = parseInt(localStorage.getItem(storageKey)) || 0;
-
-  timeSpan.innerText = seconds;
-
-  const timer = setInterval(() => {
-    seconds++;
-    localStorage.setItem(storageKey, seconds);
-    timeSpan.innerText = seconds;
-
-    if (seconds >= 20) {
-      topMessage.innerHTML = "🎉 आपने 20 सेकंड पूरा कर लिया!";
-      clearInterval(timer);
-    }
-  }, 1000);
-}
-</script>
 
 </body>
 </html>

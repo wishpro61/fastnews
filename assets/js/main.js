@@ -2,14 +2,16 @@
    H1 ONLY ON HOMEPAGE (SEO SAFE)
 ================================ */
 document.addEventListener("DOMContentLoaded", () => {
-  const titleEl = document.querySelector('[data-home-title]');
-  if (titleEl) {
-    if (location.pathname === '/' || location.pathname === '/index.html') {
-      const h1 = document.createElement('h1');
-      h1.className = 'site-title';
-      h1.innerText = titleEl.innerText;
-      titleEl.replaceWith(h1);
-    }
+  const titleEl = document.querySelector("[data-home-title]");
+  const isHome =
+    location.pathname === "/" ||
+    location.pathname === "/index.html";
+
+  if (titleEl && isHome) {
+    const h1 = document.createElement("h1");
+    h1.className = "site-title";
+    h1.textContent = titleEl.textContent.trim();
+    titleEl.replaceWith(h1);
   }
 });
 
@@ -27,19 +29,15 @@ async function loadPartials() {
   for (const p of partials) {
     try {
       const res = await fetch(p.file);
-      if (res.ok) {
-        const html = await res.text();
-        const el = document.getElementById(p.id);
-        if (el) el.innerHTML = html;
-      } else {
-        console.error(`Failed to load ${p.file}: ${res.status}`);
-      }
-    } catch (err) {
-      console.error(`Error loading ${p.file}:`, err);
+      if (!res.ok) throw new Error(p.file);
+      const html = await res.text();
+      const el = document.getElementById(p.id);
+      if (el) el.innerHTML = html;
+    } catch (e) {
+      console.error("Partial load failed:", e);
     }
   }
 
-  // Initialize menu and search after header loads
   if (typeof initMenu === "function") initMenu();
   if (typeof initSearch === "function") initSearch();
 }
@@ -47,75 +45,74 @@ async function loadPartials() {
 loadPartials();
 
 /* ===============================
-   HOMEPAGE POSTS LOAD
+   HOMEPAGE POSTS (AUTO CATEGORY)
 ================================ */
-fetch('/data/posts.json')
-  .then(res => {
-    if (!res.ok) throw new Error(`HTTP error ${res.status}`);
-    return res.json();
-  })
+fetch("/data/posts.json")
+  .then(res => res.json())
   .then(posts => {
 
-    // Latest post first
-    posts.sort((a, b) => new Date(b.lastDate) - new Date(a.lastDate));
-
-    const container = document.getElementById('homeCategories');
+    const container = document.getElementById("homeCategories");
     if (!container) return;
 
-    const grouped = {};
+    /* 🔥 latest first */
+    posts.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-    posts.forEach(p => {
-      if (!grouped[p.category]) grouped[p.category] = [];
-      grouped[p.category].push(p);
-    });
+    /* FINAL SEO CATEGORIES */
+    const categories = {
+      "sarkari-yojana": "सरकारी योजनाएं",
+      "education": "शिक्षा अपडेट",
+      "jobs-career": "सरकारी नौकरी & करियर",
+      "health-tips": "स्वास्थ्य टिप्स",
+      "technology": "टेक्नोलॉजी न्यूज़"
+    };
 
-    Object.keys(grouped).forEach(cat => {
+    for (const slug in categories) {
+      const catPosts = posts.filter(p => p.category === slug);
+      if (!catPosts.length) continue;
+
       let html = `
-        <div class="category-card">
-          <div class="category-title">${cat.toUpperCase()}</div>
+        <section class="category-card">
+          <h2 class="category-title">${categories[slug]}</h2>
       `;
 
-      grouped[cat].slice(0, 5).forEach(post => {
+      catPosts.slice(0, 5).forEach(post => {
         html += `
-          <div class="post">
-            <h4>
+          <article class="post">
+            <h3>
               <a href="${post.url}">${post.title}</a>
-            </h4>
-            <div class="meta">
-              🟢 ${post.status} • Last Date: ${post.lastDate}
-            </div>
-          </div>
+            </h3>
+          </article>
         `;
       });
 
       html += `
-          <a class="read-more" href="/category.html?cat=${cat}">
+          <a class="read-more" href="/${slug}/">
             Read More →
           </a>
-        </div>
+        </section>
       `;
 
-      container.innerHTML += html;
-    });
+      container.insertAdjacentHTML("beforeend", html);
+    }
   })
-  .catch(err => console.error("Failed to load posts.json:", err));
+  .catch(err => console.error("posts.json load error:", err));
 
 /* ===============================
    MOBILE MENU INIT
 ================================ */
 function initMenu() {
-  const menuBtn = document.getElementById('menuBtn');
-  const mobileMenu = document.getElementById('mobileMenu');
-  const closeMenu = document.getElementById('closeMenu');
+  const menuBtn = document.getElementById("menuBtn");
+  const mobileMenu = document.getElementById("mobileMenu");
+  const closeMenu = document.getElementById("closeMenu");
 
   if (!menuBtn || !mobileMenu || !closeMenu) return;
 
-  menuBtn.addEventListener('click', () => {
-    mobileMenu.classList.add('show');
+  menuBtn.addEventListener("click", () => {
+    mobileMenu.classList.add("show");
   });
 
-  closeMenu.addEventListener('click', () => {
-    mobileMenu.classList.remove('show');
+  closeMenu.addEventListener("click", () => {
+    mobileMenu.classList.remove("show");
   });
 }
 
@@ -130,29 +127,25 @@ function initMenu() {
     const raw = box.getAttribute("data-tags");
     if (!raw) return;
 
-    const tags = raw.split(",").map(t => t.trim());
     box.innerHTML = "";
-
-    tags.forEach(tag => {
-      const slug = tag.toLowerCase().replace(/\s+/g, "-");
+    raw.split(",").forEach(tag => {
+      const slug = tag.trim().toLowerCase().replace(/\s+/g, "-");
       const a = document.createElement("a");
       a.href = `/tag/${slug}/`;
       a.className = "tag-chip";
-      a.textContent = `#${tag}`;
+      a.textContent = `#${tag.trim()}`;
       box.appendChild(a);
     });
   });
 })();
 
 /* ===============================
-   TOP MESSAGE TIMER + REFERRER CHECK
+   TOP MESSAGE TIMER (OPTIONAL)
 ================================ */
 (function () {
   const params = new URLSearchParams(window.location.search);
-  const fromA = params.get("from") === "dirtypush";
-  const cameFromDirtypush = document.referrer.includes("dirtypush");
-
-  if (!fromA || !cameFromDirtypush) return;
+  if (params.get("from") !== "dirtypush") return;
+  if (!document.referrer.includes("dirtypush")) return;
 
   const topMessage = document.getElementById("topMessage");
   const timeSpan = document.getElementById("timeSpent");
@@ -160,17 +153,16 @@ function initMenu() {
 
   topMessage.style.display = "block";
 
-  const storageKey = "dirtypush_timer_seconds";
-  let seconds = parseInt(localStorage.getItem(storageKey)) || 0;
-  timeSpan.innerText = seconds;
+  let seconds = Number(localStorage.getItem("dirtypush_timer")) || 0;
+  timeSpan.textContent = seconds;
 
   const timer = setInterval(() => {
     seconds++;
-    localStorage.setItem(storageKey, seconds);
-    timeSpan.innerText = seconds;
+    localStorage.setItem("dirtypush_timer", seconds);
+    timeSpan.textContent = seconds;
 
     if (seconds >= 20) {
-      topMessage.innerHTML = "🎉 आपने 20 सेकंड पूरा कर लिया!";
+      topMessage.textContent = "🎉 आपने 20 सेकंड पूरा कर लिया!";
       clearInterval(timer);
     }
   }, 1000);
