@@ -14,7 +14,7 @@ async function loadPartials() {
       console.warn("header.html not found");
     }
 
-    // ================= COMMON SECTION =================
+    // ================= COMON SECTION =================
     const commonRes = await fetch("/partials/common-section.html");
     if (commonRes.ok) {
       const commonHTML = await commonRes.text();
