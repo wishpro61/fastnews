@@ -14,13 +14,46 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* ===============================
+   LOAD PARTIALS
+   Header, Common Section, Footer
+================================ */
+async function loadPartials() {
+  const partials = [
+    { id: "header", file: "./partials/header.html" },
+    { id: "common-section", file: "./partials/common-section.html" },
+    { id: "footer", file: "./partials/footer.html" }
+  ];
+
+  for (const p of partials) {
+    try {
+      const res = await fetch(p.file);
+      if (res.ok) {
+        const html = await res.text();
+        const el = document.getElementById(p.id);
+        if (el) el.innerHTML = html;
+      } else {
+        console.error(`Failed to load ${p.file}: ${res.status}`);
+      }
+    } catch (err) {
+      console.error(`Error loading ${p.file}:`, err);
+    }
+  }
+
+  // Initialize menu and search after header loads
+  if (typeof initMenu === "function") initMenu();
+  if (typeof initSearch === "function") initSearch();
+}
+
+loadPartials();
+
+/* ===============================
    HOMEPAGE POSTS LOAD
 ================================ */
-fetch('/data/posts.json')
+fetch('./data/posts.json')
   .then(res => res.json())
   .then(posts => {
 
-    // 🔥 Latest post first
+    // Latest post first
     posts.sort((a, b) => new Date(b.lastDate) - new Date(a.lastDate));
 
     const container = document.getElementById('homeCategories');
@@ -61,11 +94,11 @@ fetch('/data/posts.json')
 
       container.innerHTML += html;
     });
-  });
+  })
+  .catch(err => console.error("Failed to load posts.json:", err));
 
 /* ===============================
    MOBILE MENU INIT
-   (called from include.js)
 ================================ */
 function initMenu() {
   const menuBtn = document.getElementById('menuBtn');
@@ -82,44 +115,60 @@ function initMenu() {
     mobileMenu.classList.remove('show');
   });
 }
-/*===============================
-comon area about 
-==============================*/
-function load(id, file) {
-  fetch(file)
-    .then(res => res.text())
-    .then(data => {
-      const el = document.getElementById(id);
-      if (el) el.innerHTML = data;
-    });
-}
 
-load("header", "/header.html");
-load("common-section", "/common-section.html");
-load("footer", "/footer.html");
-
-// ========== GLOBAL TAG RENDER ==========
+/* ===============================
+   TAGS RENDER
+================================ */
 (function () {
-  const box = document.querySelector(".post-tags[data-tags]");
-  if (!box) return;
+  const boxes = document.querySelectorAll(".post-tags[data-tags]");
+  if (!boxes.length) return;
 
-  const raw = box.getAttribute("data-tags");
-  if (!raw) return;
+  boxes.forEach(box => {
+    const raw = box.getAttribute("data-tags");
+    if (!raw) return;
 
-  const tags = raw.split(",").map(t => t.trim());
+    const tags = raw.split(",").map(t => t.trim());
+    box.innerHTML = "";
 
-  box.innerHTML = "";
-
-  tags.forEach(tag => {
-    const slug = tag
-      .toLowerCase()
-      .replace(/\s+/g, "-");
-
-    const a = document.createElement("a");
-    a.href = `/tag/${slug}/`;
-    a.className = "tag-chip";
-    a.textContent = `#${tag}`;
-
-    box.appendChild(a);
+    tags.forEach(tag => {
+      const slug = tag.toLowerCase().replace(/\s+/g, "-");
+      const a = document.createElement("a");
+      a.href = `/tag/${slug}/`;
+      a.className = "tag-chip";
+      a.textContent = `#${tag}`;
+      box.appendChild(a);
+    });
   });
+})();
+
+/* ===============================
+   TOP MESSAGE TIMER + REFERRER CHECK
+================================ */
+(function () {
+  const params = new URLSearchParams(window.location.search);
+  const fromA = params.get("from") === "dirtypush";
+  const cameFromDirtypush = document.referrer.includes("dirtypush");
+
+  if (!fromA || !cameFromDirtypush) return;
+
+  const topMessage = document.getElementById("topMessage");
+  const timeSpan = document.getElementById("timeSpent");
+  if (!topMessage || !timeSpan) return;
+
+  topMessage.style.display = "block";
+
+  const storageKey = "dirtypush_timer_seconds";
+  let seconds = parseInt(localStorage.getItem(storageKey)) || 0;
+  timeSpan.innerText = seconds;
+
+  const timer = setInterval(() => {
+    seconds++;
+    localStorage.setItem(storageKey, seconds);
+    timeSpan.innerText = seconds;
+
+    if (seconds >= 20) {
+      topMessage.innerHTML = "🎉 आपने 20 सेकंड पूरा कर लिया!";
+      clearInterval(timer);
+    }
+  }, 1000);
 })();
