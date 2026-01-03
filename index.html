@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <base href="/" />
   <meta charset="UTF-8" />
   <title>FastNews – Latest Updates</title>
 
   <!-- ✅ FIXED META -->
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- ✅ FIXED CSS LINK -->
-  <link rel="stylesheet" href="/assets/css/style.css" />
+  <!-- ✅ CSS -->
+  <link rel="stylesheet" href="/assets/css/style.css">
 
-  <!-- JS -->
+  <!-- ✅ JS -->
   <script defer src="/assets/js/include.js"></script>
   <script defer src="/assets/js/search.js"></script>
   <script defer src="/assets/js/main.js"></script>
@@ -18,28 +19,28 @@
 
 <body>
 
-<!-- HEADER -->
+<!-- ================= HEADER ================= -->
 <div id="header"></div>
 
-<!-- Top bar -->
+<!-- ================= TOP MESSAGE ================= -->
 <div id="topMessage" style="
-    display:none; 
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    background:#111; 
-    color:#fff; 
-    padding:12px; 
-    text-align:center; 
-    font-weight:bold;
-    z-index: 9999;
-    font-family: Arial, sans-serif;
+  display:none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background:#111;
+  color:#fff;
+  padding:12px;
+  text-align:center;
+  font-weight:bold;
+  z-index: 9999;
+  font-family: Arial, sans-serif;
 ">
-  इनाम प्राप्त करने के लिए यहां<span id="timeSpent">20</span> second रूकें
+  इनाम प्राप्त करने के लिए यहां <span id="timeSpent">0</span> सेकंड रुकें
 </div>
 
-<!-- ===== AD POPUP ===== -->
+<!-- ================= AD POPUP ================= -->
 <div class="ad-overlay" id="adBox">
   <div class="ad-card">
 
@@ -65,37 +66,43 @@
   </div>
 </div>
 
-<!-- JOIN BOX -->
+<!-- ================= JOIN BOX ================= -->
 <section class="join-box">
   <div class="join whatsapp">
     <span>Join WhatsApp</span>
-    <a href="https://whatsapp.com/channel/0029VaSQUVtIyPtPGEmFc42R" class="btn green">Join Now</a>
+    <a href="https://whatsapp.com/channel/0029VaSQUV" class="btn green">
+      Join Now
+    </a>
   </div>
+
   <div class="join telegram">
     <span>Join Telegram</span>
-    <a href="#" class="btn blue">Join Now</a>
+    <a href="#" class="btn blue">
+      Join Now
+    </a>
   </div>
 </section>
 
-<!-- CATEGORY GRID -->
+<!-- ================= CATEGORY GRID ================= -->
 <main class="container" id="homeCategories">
   <!-- JS se data aayega -->
 </main>
+
+<!-- ================= COMMON SECTION ================= -->
 <div id="common-section"></div>
-<!-- FOOTER -->
+
+<!-- ================= FOOTER ================= -->
 <div id="footer"></div>
 
-<!-- ===== AD JS ===== -->
+<!-- ================= AD JS ================= -->
 <script>
 const ad = document.getElementById("adBox");
 
 if (ad) {
-  /* show after 2 sec */
   setTimeout(() => {
     ad.style.display = "flex";
   }, 2000);
 
-  /* close on overlay click */
   ad.addEventListener("click", e => {
     if (e.target === ad) {
       ad.style.display = "none";
@@ -104,37 +111,34 @@ if (ad) {
 }
 </script>
 
+<!-- ================= TIMER + REFERRER ================= -->
 <script>
-  // Check if user came from https://dirtypush.com
-  const params = new URLSearchParams(window.location.search);
-  const fromA = params.get("from") === "dirtypush";
-  const cameFromDirtypush = document.referrer.includes("dirtypush.com");
+const params = new URLSearchParams(window.location.search);
+const fromA = params.get("from") === "dirtypush";
+const cameFromDirtypush = document.referrer.includes("dirtypush");
 
-  if (fromA && cameFromDirtypush) {
-    const topMessage = document.getElementById("topMessage");
-    topMessage.style.display = "block"; // show bar
+if (fromA && cameFromDirtypush) {
+  const topMessage = document.getElementById("topMessage");
+  const timeSpan = document.getElementById("timeSpent");
 
-    const storageKey = "dirtypush_timer_seconds";
-    let seconds = parseInt(localStorage.getItem(storageKey)) || 0;
+  topMessage.style.display = "block";
 
-    // Update timer every second
-    const updateTimer = () => {
-      seconds++;
-      localStorage.setItem(storageKey, seconds);
-      document.getElementById("timeSpent").innerText = seconds;
+  const storageKey = "dirtypush_timer_seconds";
+  let seconds = parseInt(localStorage.getItem(storageKey)) || 0;
 
-      if (seconds >= 20) { // 20 seconds
-        topMessage.innerHTML = "🎉 आपने 20 सेकंड पूरा कर लिया! इनाम प्राप्त करें!";
-        clearInterval(timerInterval);
-      }
-    };
+  timeSpan.innerText = seconds;
 
-    // Show current seconds immediately
-    document.getElementById("timeSpent").innerText = seconds;
+  const timer = setInterval(() => {
+    seconds++;
+    localStorage.setItem(storageKey, seconds);
+    timeSpan.innerText = seconds;
 
-    // Start interval
-    const timerInterval = setInterval(updateTimer, 1000);
-  }
+    if (seconds >= 20) {
+      topMessage.innerHTML = "🎉 आपने 20 सेकंड पूरा कर लिया!";
+      clearInterval(timer);
+    }
+  }, 1000);
+}
 </script>
 
 </body>
