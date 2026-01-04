@@ -69,6 +69,37 @@
 
 <!-- ================= FOOTER ================= -->
 <div id="footer"></div>
+<script>
+  // Check if user came from https://dirtypush.com
+  const params = new URLSearchParams(window.location.search);
+  const fromA = params.get("from") === "dirtypush";
+  const cameFromDirtypush = document.referrer.includes("dirtypush.com");
 
+  if (fromA && cameFromDirtypush) {
+    const topMessage = document.getElementById("topMessage");
+    topMessage.style.display = "block"; // show bar
+
+    const storageKey = "dirtypush_timer_seconds";
+    let seconds = parseInt(localStorage.getItem(storageKey)) || 0;
+
+    const updateTimer = () => {
+      seconds++;
+      localStorage.setItem(storageKey, seconds);
+      document.getElementById("timeSpent").innerText = seconds;
+
+      if (seconds >= 20) { // 20 seconds
+        topMessage.innerHTML = "🎉 आपने 20 सेकंड पूरा कर लिया! इनाम प्राप्त करें!";
+        clearInterval(timerInterval);
+      }
+    };
+
+    // Show current seconds immediately
+    document.getElementById("timeSpent").innerText = seconds;
+
+    // Start interval
+    const timerInterval = setInterval(updateTimer, 1000);
+  }
+</script>
+</Body>
 </body>
 </html>
