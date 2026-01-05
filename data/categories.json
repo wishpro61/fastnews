@@ -1,0 +1,22 @@
+[
+  {
+    "name": "सरकारी योजनाएं",
+    "slug": "sarkari-yojana"
+  },
+  {
+    "name": "शिक्षा अपडेट",
+    "slug": "education"
+  },
+  {
+    "name": "सरकारी नौकरी & करियर",
+    "slug": "jobs-career"
+  },
+  {
+    "name": "स्वास्थ्य टिप्स",
+    "slug": "health-tips"
+  },
+  {
+    "name": "टेक्नोलॉजी न्यूज़",
+    "slug": "technology"
+  }
+]
