@@ -4,31 +4,38 @@
   <button id="push-enable-btn">Enable</button>
 </div>
 
+<!-- Firebase Push Logic -->
 <script type="module" src="/push.js"></script>
 
+<!-- Banner Click Logic -->
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const banner = document.getElementById('push-banner');
-    const btn = document.getElementById('push-enable-btn');
+document.addEventListener('DOMContentLoaded', () => {
+  const banner = document.getElementById('push-banner');
+  const btn = document.getElementById('push-enable-btn');
 
-    if (!banner || !btn) return; // safety check
+  if (!banner || !btn) {
+    console.error('❌ Push banner elements not found');
+    return;
+  }
 
-    btn.addEventListener('click', async () => {
-      // wait until enablePush function is available
-      if (typeof enablePush === 'function') {
-        await enablePush(); 
-        banner.style.display = 'none'; 
-        localStorage.setItem('push-enabled', 'true'); 
-      } else {
-        console.error('enablePush function not loaded yet');
-      }
-    });
+  btn.addEventListener('click', async () => {
+    console.log('🟢 Enable button clicked');
 
-    // check if user already enabled push
-    if (localStorage.getItem('push-enabled') === 'true') {
-      banner.style.display = 'none';
+    if (typeof window.enablePush !== 'function') {
+      console.error('❌ enablePush not available');
+      alert('Push system not ready yet');
+      return;
     }
+
+    await window.enablePush();
+    banner.style.display = 'none';
+    localStorage.setItem('push-enabled', 'true');
   });
+
+  if (localStorage.getItem('push-enabled') === 'true') {
+    banner.style.display = 'none';
+  }
+});
 </script>
 
 <footer class="site-footer">
