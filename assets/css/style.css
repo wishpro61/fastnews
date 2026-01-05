@@ -466,3 +466,34 @@ tag 3d
     6px 6px 12px rgba(0,0,0,0.22),
    -6px -6px 12px rgba(255,255,255,1);
 }
+
+#push-banner {
+  position: fixed;
+  bottom: 80px; /* Footer se thoda upar */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ffd700;
+  color: #000;
+  padding: 12px 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: Arial, sans-serif;
+}
+
+#push-banner button {
+  background-color: #ff5722;
+  border: none;
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#push-banner button:hover {
+  background-color: #e64a19;
+}

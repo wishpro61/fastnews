@@ -1,3 +1,29 @@
+<!-- Sticky Push Banner -->
+<div id="push-banner">
+  <span>🔔 Get latest news alerts!</span>
+  <button id="push-enable-btn">Enable</button>
+</div>
+
+<script>
+  const banner = document.getElementById('push-banner');
+  const btn = document.getElementById('push-enable-btn');
+
+  btn.addEventListener('click', async () => {
+    if (typeof enablePush === 'function') {
+      await enablePush(); // tumhara push.js ka function
+      banner.style.display = 'none'; // hide banner after enable
+      localStorage.setItem('push-enabled', 'true'); // remember user enabled
+    }
+  });
+
+  // Page load me check karo agar user already enabled hai
+  window.addEventListener('load', () => {
+    if (localStorage.getItem('push-enabled') === 'true') {
+      banner.style.display = 'none';
+    }
+  });
+</script>
+
 <footer class="site-footer">
   <p>© <span id="year"></span> FastNews. All Rights Reserved.</p>
 </footer>
