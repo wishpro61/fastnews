@@ -5,19 +5,24 @@
 </div>
 
 <script>
-  const banner = document.getElementById('push-banner');
-  const btn = document.getElementById('push-enable-btn');
+  document.addEventListener('DOMContentLoaded', () => {
+    const banner = document.getElementById('push-banner');
+    const btn = document.getElementById('push-enable-btn');
 
-  btn.addEventListener('click', async () => {
-    if (typeof enablePush === 'function') {
-      await enablePush(); // tumhara push.js ka function
-      banner.style.display = 'none'; // hide banner after enable
-      localStorage.setItem('push-enabled', 'true'); // remember user enabled
-    }
-  });
+    if (!banner || !btn) return; // safety check
 
-  // Page load me check karo agar user already enabled hai
-  window.addEventListener('load', () => {
+    btn.addEventListener('click', async () => {
+      // wait until enablePush function is available
+      if (typeof enablePush === 'function') {
+        await enablePush(); 
+        banner.style.display = 'none'; 
+        localStorage.setItem('push-enabled', 'true'); 
+      } else {
+        console.error('enablePush function not loaded yet');
+      }
+    });
+
+    // check if user already enabled push
     if (localStorage.getItem('push-enabled') === 'true') {
       banner.style.display = 'none';
     }
