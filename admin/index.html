@@ -1,50 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Admin Panel – Ncertcollege</title>
-
-  <!-- NO INDEX -->
-  <meta name="robots" content="noindex,nofollow">
-
-  <!-- TinyMCE -->
-  <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js"></script>
-
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Admin Panel – Ncertcollege</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>📝 Create New Post</h1>
+<h1>Create New Post</h1>
 
-<label>Post Title</label>
-<input type="text" id="title" placeholder="Enter post title">
+<label>Title</label>
+<input id="title">
 
 <label>Slug</label>
-<input type="text" id="slug" placeholder="auto-generated">
+<input id="slug">
 
 <label>Category</label>
 <select id="category"></select>
 
 <label>Tags (comma separated)</label>
-<input type="text" id="tags" placeholder="education, jobs, scheme">
+<input id="tags">
 
-<label>Thumbnail Image URL</label>
-<input type="text" id="thumbnail">
+<label>Thumbnail URL</label>
+<input id="thumbnail">
 
 <label>Thumbnail ALT</label>
-<input type="text" id="thumbAlt">
+<input id="thumbAlt">
 
-<label>Thumbnail TITLE</label>
-<input type="text" id="thumbTitle">
+<div class="toolbar">
+  <button onclick="cmd('bold')">B</button>
+  <button onclick="cmd('italic')">I</button>
+  <button onclick="cmd('underline')">U</button>
 
-<label>Post Content</label>
-<textarea id="editor"></textarea>
+  <button onclick="heading('h2')">H2</button>
+  <button onclick="heading('h3')">H3</button>
+  <button onclick="heading('h4')">H4</button>
 
-<button onclick="previewPost()">👁 Preview</button>
-<button onclick="publishPost()">🚀 Publish</button>
+  <button onclick="addLink()">Link</button>
+  <button onclick="addImage()">Image</button>
+  <button onclick="addButton()">Button</button>
+  <button onclick="addEmbed()">Embed</button>
+</div>
+
+<div id="editor" contenteditable="true"></div>
+
+<button onclick="preview()">Preview</button>
+<button onclick="publish()">Publish</button>
 
 <script src="editor.js"></script>
 <script src="publish.js"></script>
-
 </body>
 </html>

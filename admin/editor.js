@@ -1,39 +1,61 @@
-// Load categories
+// category load
 fetch("../data/categories.json")
-  .then(res => res.json())
-  .then(data => {
-    const select = document.getElementById("category");
-    data.forEach(cat => {
-      const opt = document.createElement("option");
-      opt.value = cat.slug;
-      opt.textContent = cat.name;
-      select.appendChild(opt);
-    });
+.then(res => res.json())
+.then(data => {
+  const select = document.getElementById("category");
+  data.forEach(c => {
+    const o = document.createElement("option");
+    o.value = c.slug;
+    o.textContent = c.name;
+    select.appendChild(o);
   });
-
-// Slug auto generate
-document.getElementById("title").addEventListener("input", e => {
-  document.getElementById("slug").value =
-    e.target.value.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 });
 
-// TinyMCE
-tinymce.init({
-  selector: "#editor",
-  height: 500,
-  menubar: false,
-  plugins: "link image lists code media",
-  toolbar:
-    "undo redo | bold italic underline | " +
-    "blocks | bullist numlist | link image media | code",
+// slug auto
+title.oninput = () => {
+  slug.value = title.value.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+};
 
-  block_formats:
-    "Paragraph=p; Heading 2=h2; Heading 3=h3; Heading 4=h4; Heading 5=h5; Heading 6=h6",
+function cmd(command) {
+  document.execCommand(command, false, null);
+}
 
-  image_title: true,
-  automatic_uploads: true,
-  media_live_embeds: true,
+function heading(tag) {
+  document.execCommand("formatBlock", false, tag);
+}
 
-  content_style:
-    "body { font-family: Arial; line-height: 1.7; }"
-});
+function addLink() {
+  const url = prompt("Enter URL");
+  if (url) document.execCommand("createLink", false, url);
+}
+
+function addImage() {
+  const url = prompt("Image URL");
+  const alt = prompt("ALT text");
+  if (url) {
+    document.execCommand(
+      "insertHTML",
+      false,
+      `<img src="${url}" alt="${alt}" title="${alt}" loading="lazy">`
+    );
+  }
+}
+
+function addButton() {
+  const text = prompt("Button Text");
+  const url = prompt("Button URL");
+  if (text && url) {
+    document.execCommand(
+      "insertHTML",
+      false,
+      `<a href="${url}" class="btn">${text}</a>`
+    );
+  }
+}
+
+function addEmbed() {
+  const code = prompt("Paste embed iframe");
+  if (code) {
+    document.execCommand("insertHTML", false, code);
+  }
+}
