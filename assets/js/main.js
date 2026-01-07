@@ -167,3 +167,35 @@ function initMenu() {
     }
   }, 1000);
 })();
+
+let deferredPrompt;
+
+/* Show install banner */
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+
+  // Agar app pehle se install nahi hai
+  if (!window.matchMedia("(display-mode: standalone)").matches) {
+    const banner = document.getElementById("installBanner");
+    if (banner) banner.style.display = "block";
+  }
+});
+
+/* Install click */
+document.addEventListener("click", async (e) => {
+  if (e.target.id === "installBtn" && deferredPrompt) {
+    deferredPrompt.prompt();
+    const choice = await deferredPrompt.userChoice;
+
+    if (choice.outcome === "accepted") {
+      document.getElementById("installBanner")?.remove();
+    }
+    deferredPrompt = null;
+  }
+});
+
+/* Already installed → hide banner */
+if (window.matchMedia("(display-mode: standalone)").matches) {
+  document.getElementById("installBanner")?.remove();
+}
