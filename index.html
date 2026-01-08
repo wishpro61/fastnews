@@ -4,49 +4,26 @@
   <base href="/" />
   <meta charset="UTF-8" />
 
-  <title>NcertCollege – सरकारी योजनाएं, नौकरियां और शिक्षा अपडेट</title>
+  <title>NcertCollege – सरकारी योजनाएं, नौकरियां और शिक्षा</title>
 
-  <!-- ✅ SEO META -->
+  <!-- SEO -->
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="NcertCollege पर पढ़ें सरकारी योजनाएं, शिक्षा अपडेट, सरकारी नौकरी, स्वास्थ्य टिप्स और टेक्नोलॉजी न्यूज़ – सबसे पहले और सटीक जानकारी।" />
+  <meta name="description" content="NcertCollege पर सरकारी योजनाएं, सरकारी नौकरी, शिक्षा और ताजा खबरें पढ़ें।" />
+  <meta name="robots" content="noindex, nofollow" />
 
-  <!-- ✅ CSS -->
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#0d6efd" />
+
+  <!-- CSS -->
   <link rel="stylesheet" href="/assets/css/style.css" />
 
-  <!-- ✅ JS -->
+  <!-- JS -->
   <script defer src="/assets/js/include.js"></script>
   <script defer src="/assets/js/search.js"></script>
   <script defer src="/assets/js/main.js"></script>
-
-<link rel="manifest" href="/manifest.json">
-<meta name="theme-color" content="#0d6efd">
-<meta name="robots" content="noindex, nofollow">
 </head>
 
-<body>
-
-<!-- ================= HEADER ================= -->
-<div id="header"></div>
-
-<!DOCTYPE html>
-<html lang="hi">
-<head>
-  <meta charset="UTF-8">
-
-  <title>NcertCollege – सरकारी योजनाएं, नौकरियां और शिक्षा अपडेट</title>
-
-  <!-- SEO -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="NcertCollege पर सरकारी योजनाएं, सरकारी नौकरी, शिक्षा और ताजा खबरें पढ़ें।">
-
-  <!-- PWA -->
-  <link rel="manifest" href="/manifest.json">
-  <meta name="theme-color" content="#0d6efd">
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="/assets/css/style.css">
-
-</head>
 <body>
 
 <!-- ================= HEADER ================= -->
@@ -54,9 +31,11 @@
 
 <!-- ================= JOIN BOX ================= -->
 <section class="join-box">
+  <h2 class="visually-hidden">Join Our Channels</h2>
+
   <div class="join whatsapp">
     <span>Join WhatsApp</span>
-    <a href="https://whatsapp.com/channel/0029VaSQUV" target="_blank">
+    <a href="https://whatsapp.com/channel/0029VaSQUV" class="btn green">
       Join Now
     </a>
   </div>
@@ -71,7 +50,7 @@
 
 <!-- ================= HOME CONTENT ================= -->
 <main class="container" id="homeCategories">
-  <!-- Categories + posts JS se load honge -->
+  <!-- Categories + posts JS से load होंगे -->
 </main>
 
 <!-- ================= COMMON ================= -->
@@ -79,11 +58,6 @@
 
 <!-- ================= FOOTER ================= -->
 <div data-include="/partials/footer.html"></div>
-
-<!-- ================= JS ================= -->
-<script src="/assets/js/include.js"></script>
-<script src="/assets/js/search.js"></script>
-<script src="/assets/js/main.js"></script>
 
 <!-- ================= SERVICE WORKER ================= -->
 <script>
