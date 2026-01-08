@@ -1,7 +1,7 @@
 <!-- Sticky Push Banner -->
 <div id="push-banner">
   <span>🔔 Get latest news alerts!</span>
-  <button id="push-enable-btn">Enable</button>
+  <button id="push-enable-btn" class="btn orange">Enable</button>
 </div>
 
 <!-- Firebase Push Logic -->
@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('push-enabled', 'true');
   });
 
+  // Hide banner if already enabled
   if (localStorage.getItem('push-enabled') === 'true') {
     banner.style.display = 'none';
   }
@@ -39,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <footer class="site-footer">
-  <p>© <span id="year"></span> FastNews. All Rights Reserved.</p>
+  <p>© <span id="year"></span> NcertCollege. All Rights Reserved.</p>
 </footer>
 
 <script>
