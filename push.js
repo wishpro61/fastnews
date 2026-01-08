@@ -35,12 +35,13 @@ const db = getFirestore(app);
 let swReg = null;
 
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/firebase-messaging-sw.js")
+  navigator.serviceWorker
+    .register("/firebase-messaging-sw.js")
     .then(reg => {
       swReg = reg;
       console.log("✅ Service Worker registered");
     })
-    .catch(err => console.error("❌ SW registration failed", err));
+    .catch(err => console.error("❌ SW registration failed:", err));
 }
 
 // ===============================
@@ -48,8 +49,13 @@ if ("serviceWorker" in navigator) {
 // ===============================
 async function enablePush() {
   try {
+    if (!("Notification" in window)) {
+      alert("❌ Browser notification support nahi karta");
+      return;
+    }
+
     if (!swReg) {
-      alert("❌ Service Worker not ready");
+      alert("❌ Service Worker ready nahi hai");
       return;
     }
 
@@ -74,20 +80,20 @@ async function enablePush() {
 
     if (!snap.exists()) {
       await setDoc(ref, {
-        token: token,
+        token,
         createdAt: Date.now()
       });
-      console.log("✅ Token saved");
+      console.log("✅ Token saved in Firestore");
     }
 
-    alert("🔔 Push notification enabled!");
+    alert("🔔 Push notification enabled successfully!");
   } catch (err) {
-    console.error("Push error:", err);
-    alert("❌ Push error, check setup");
+    console.error("❌ Push error:", err);
+    alert("❌ Push error, console check karo");
   }
 }
 
 // ===============================
-// Expose to button
+// Expose to Button (IMPORTANT)
 // ===============================
 window.enablePush = enablePush;
