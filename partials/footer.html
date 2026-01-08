@@ -4,41 +4,6 @@
   <button id="push-enable-btn" class="btn orange">Enable</button>
 </div>
 
-<!-- Firebase Push Logic -->
-<script type="module" src="/push.js"></script>
-
-<!-- Banner Click Logic -->
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const banner = document.getElementById('push-banner');
-  const btn = document.getElementById('push-enable-btn');
-
-  if (!banner || !btn) {
-    console.error('❌ Push banner elements not found');
-    return;
-  }
-
-  btn.addEventListener('click', async () => {
-    console.log('🟢 Enable button clicked');
-
-    if (typeof window.enablePush !== 'function') {
-      console.error('❌ enablePush not available');
-      alert('Push system not ready yet');
-      return;
-    }
-
-    await window.enablePush();
-    banner.style.display = 'none';
-    localStorage.setItem('push-enabled', 'true');
-  });
-
-  // Hide banner if already enabled
-  if (localStorage.getItem('push-enabled') === 'true') {
-    banner.style.display = 'none';
-  }
-});
-</script>
-
 <footer class="site-footer">
   <p>© <span id="year"></span> NcertCollege. All Rights Reserved.</p>
 </footer>
