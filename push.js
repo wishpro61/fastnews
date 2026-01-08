@@ -6,7 +6,7 @@ import { getMessaging, getToken } from "https://www.gstatic.com/firebasejs/9.23.
 import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 
 // ===============================
-// Firebase configuration
+// Firebase config
 // ===============================
 const firebaseConfig = {
   apiKey: "AIzaSyBbtvvNkrWILfiOAZGBxNyEnLV5YOh9XyM",
@@ -17,9 +17,6 @@ const firebaseConfig = {
   appId: "1:435786162332:web:6669c8056fd022f1378d5"
 };
 
-// ===============================
-// VAPID Public Key
-// ===============================
 const VAPID_KEY = "BNzK5Gc-peJ4dkSg1HNUaqj50a2nY8G";
 
 // ===============================
@@ -33,15 +30,15 @@ const db = getFirestore(app);
 // Register Service Worker
 // ===============================
 let swReg = null;
-
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker
-    .register("/firebase-messaging-sw.js")
-    .then(reg => {
-      swReg = reg;
+async function registerSW() {
+  if ("serviceWorker" in navigator) {
+    try {
+      swReg = await navigator.serviceWorker.register("/firebase-messaging-sw.js");
       console.log("✅ Service Worker registered");
-    })
-    .catch(err => console.error("❌ SW registration failed:", err));
+    } catch (err) {
+      console.error("❌ SW registration failed:", err);
+    }
+  }
 }
 
 // ===============================
@@ -49,13 +46,16 @@ if ("serviceWorker" in navigator) {
 // ===============================
 async function enablePush() {
   try {
-    if (!("Notification" in window)) {
-      alert("❌ Browser notification support nahi karta");
-      return;
+    if (!swReg) {
+      await registerSW();
+      if (!swReg) {
+        alert("❌ Service Worker not ready");
+        return;
+      }
     }
 
-    if (!swReg) {
-      alert("❌ Service Worker ready nahi hai");
+    if (!("Notification" in window)) {
+      alert("❌ Browser does not support notifications");
       return;
     }
 
@@ -65,13 +65,9 @@ async function enablePush() {
       return;
     }
 
-    const token = await getToken(messaging, {
-      vapidKey: VAPID_KEY,
-      serviceWorkerRegistration: swReg
-    });
-
+    const token = await getToken(messaging, { vapidKey: VAPID_KEY, serviceWorkerRegistration: swReg });
     if (!token) {
-      alert("❌ Token generate nahi hua");
+      alert("❌ Token generation failed");
       return;
     }
 
@@ -79,21 +75,35 @@ async function enablePush() {
     const snap = await getDoc(ref);
 
     if (!snap.exists()) {
-      await setDoc(ref, {
-        token,
-        createdAt: Date.now()
-      });
+      await setDoc(ref, { token, createdAt: Date.now() });
       console.log("✅ Token saved in Firestore");
     }
 
-    alert("🔔 Push notification enabled successfully!");
+    alert("🔔 Push notifications enabled!");
+    const banner = document.getElementById("push-banner");
+    if (banner) banner.style.display = "none";
+    localStorage.setItem("push-enabled", "true");
+
   } catch (err) {
     console.error("❌ Push error:", err);
-    alert("❌ Push error, console check karo");
+    alert("❌ Push setup failed, check console");
   }
 }
 
 // ===============================
-// Expose to Button (IMPORTANT)
+// Attach button click
 // ===============================
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.getElementById("push-enable-btn");
+  if (btn) btn.addEventListener("click", enablePush);
+
+  // Hide banner if already enabled
+  if (localStorage.getItem("push-enabled") === "true") {
+    const banner = document.getElementById("push-banner");
+    if (banner) banner.style.display = "none";
+  }
+});
+
+// ===============================
+// Expose globally (optional)
 window.enablePush = enablePush;
