@@ -28,29 +28,35 @@
 <!-- ================= HEADER ================= -->
 <div id="header"></div>
 
-<!-- Top bar -->
-<div id="topMessage" style="
-    display:none; 
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    background:#111; 
-    color:#fff; 
-    padding:12px; 
-    text-align:center; 
-    font-weight:bold;
-    z-index: 9999;
-    font-family: Arial, sans-serif;
-">
-  इनाम प्राप्त करने के लिए यहां <span id="timeSpent">0</span> second रूकें
-</div>
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+
+  <title>NcertCollege – सरकारी योजनाएं, नौकरियां और शिक्षा अपडेट</title>
+
+  <!-- SEO -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="NcertCollege पर सरकारी योजनाएं, सरकारी नौकरी, शिक्षा और ताजा खबरें पढ़ें।">
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0d6efd">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/css/style.css">
+
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<div data-include="/partials/header.html"></div>
 
 <!-- ================= JOIN BOX ================= -->
 <section class="join-box">
   <div class="join whatsapp">
     <span>Join WhatsApp</span>
-    <a href="https://whatsapp.com/channel/0029VaSQUV" class="btn green">
+    <a href="https://whatsapp.com/channel/0029VaSQUV" target="_blank">
       Join Now
     </a>
   </div>
@@ -63,47 +69,30 @@
   </div>
 </section>
 
-<!-- ================= HOMEPAGE CATEGORIES ================= -->
+<!-- ================= HOME CONTENT ================= -->
 <main class="container" id="homeCategories">
-  <!-- Categories + posts yahin JS se auto load honge -->
+  <!-- Categories + posts JS se load honge -->
 </main>
 
-<!-- ================= COMMON SECTION ================= -->
-<div id="common-section"></div>
+<!-- ================= COMMON ================= -->
+<div data-include="/partials/common-section.html"></div>
 
 <!-- ================= FOOTER ================= -->
-<div id="footer"></div>
+<div data-include="/partials/footer.html"></div>
+
+<!-- ================= JS ================= -->
+<script src="/assets/js/include.js"></script>
+<script src="/assets/js/search.js"></script>
+<script src="/assets/js/main.js"></script>
+
+<!-- ================= SERVICE WORKER ================= -->
 <script>
-  // Check if user came from https://dirtypush.com
-  const params = new URLSearchParams(window.location.search);
-  const fromA = params.get("from") === "dirtypush";
-  const cameFromDirtypush = document.referrer.includes("dirtypush.com");
-
-  if (fromA && cameFromDirtypush) {
-    const topMessage = document.getElementById("topMessage");
-    topMessage.style.display = "block"; // show bar
-
-    const storageKey = "dirtypush_timer_seconds";
-    let seconds = parseInt(localStorage.getItem(storageKey)) || 0;
-
-    const updateTimer = () => {
-      seconds++;
-      localStorage.setItem(storageKey, seconds);
-      document.getElementById("timeSpent").innerText = seconds;
-
-      if (seconds >= 20) { // 20 seconds
-        topMessage.innerHTML = "🎉 आपने 20 सेकंड पूरा कर लिया! इनाम प्राप्त करें!";
-        clearInterval(timerInterval);
-      }
-    };
-
-    // Show current seconds immediately
-    document.getElementById("timeSpent").innerText = seconds;
-
-    // Start interval
-    const timerInterval = setInterval(updateTimer, 1000);
-  }
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("/firebase-messaging-sw.js");
+  });
+}
 </script>
-</Body>
+
 </body>
 </html>
