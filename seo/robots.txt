@@ -1,34 +1,7 @@
-# robots.txt for http://ncertcollege.com/
-# SEO, Google News & Discover friendly
+# robots.txt - DEVELOPMENT MODE
+# Block entire site from indexing
 
-# Allow all crawlers
 User-agent: *
-Disallow: /admin/
-Disallow: /login/
-Disallow: /private/
-Disallow: /tmp/
-Disallow: /cgi-bin/
-
-Allow: /assets/
-Allow: /images/
-Allow: /css/
-Allow: /js/
-Allow: /
-
-# Sitemap location
-Sitemap: http://ncertcollege.com/sitemap.xml
-
-# Special rules for Google News
-User-agent: Googlebot-News
-Allow: /
-
-# Special rules for Google Discover
-User-agent: Googlebot-Discover
-Allow: /
-
-# Block specific unwanted bots (optional)
-User-agent: AhrefsBot
 Disallow: /
 
-User-agent: MJ12bot
-Disallow: /
+# Sitemap disabled during development
