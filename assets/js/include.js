@@ -1,55 +1,32 @@
 // ===============================
-// GLOBAL PARTIAL LOADER
+// GLOBAL PARTIAL LOADER (FINAL)
 // ===============================
 
-async function loadPartials() {
-  try {
-    // ================= HEADER =================
-    const headerRes = await fetch("/partials/header.html");
-    if (headerRes.ok) {
-      const headerHTML = await headerRes.text();
-      const headerEl = document.getElementById("header");
-      if (headerEl) headerEl.innerHTML = headerHTML;
-    } else {
-      console.warn("header.html not found");
+document.addEventListener("DOMContentLoaded", () => {
+  const includes = document.querySelectorAll("[data-include]");
+
+  includes.forEach(async (el) => {
+    const file = el.getAttribute("data-include");
+
+    try {
+      const res = await fetch(file);
+      if (!res.ok) throw new Error(file + " not found");
+
+      const html = await res.text();
+      el.innerHTML = html;
+
+      // ✅ Footer year auto-fix (after load)
+      const yearEl = el.querySelector("#year");
+      if (yearEl) {
+        yearEl.textContent = new Date().getFullYear();
+      }
+
+      // ✅ Header / Search init (safe)
+      if (typeof initMenu === "function") initMenu();
+      if (typeof initSearch === "function") initSearch();
+
+    } catch (err) {
+      console.error("❌ Include error:", err.message);
     }
-
-    // ================= COMON SECTION =================
-    const commonRes = await fetch("/partials/common-section.html");
-    if (commonRes.ok) {
-      const commonHTML = await commonRes.text();
-      const commonEl = document.getElementById("common-section");
-      if (commonEl) commonEl.innerHTML = commonHTML;
-    } else {
-      console.warn("common-section.html not found");
-    }
-
-    // ================= FOOTER =================
-    const footerRes = await fetch("/partials/footer.html");
-    if (footerRes.ok) {
-      const footerHTML = await footerRes.text();
-      const footerEl = document.getElementById("footer");
-      if (footerEl) footerEl.innerHTML = footerHTML;
-    } else {
-      console.warn("footer.html not found");
-    }
-
-    // ================= INIT FUNCTIONS =================
-    // ⚠️ header/footer load hone ke baad hi call honge
-    if (typeof initMenu === "function") {
-      initMenu();
-    }
-
-    if (typeof initSearch === "function") {
-      initSearch();
-    }
-
-  } catch (err) {
-    console.error("❌ Partial load error:", err);
-  }
-}
-
-// ===============================
-// DOM READY
-// ===============================
-document.addEventListener("DOMContentLoaded", loadPartials);
+  });
+});
