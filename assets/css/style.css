@@ -1,3 +1,9 @@
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+
 * {
   box-sizing: border-box;
   font-family: system-ui, sans-serif;
@@ -225,9 +231,13 @@ padding: 10px;
 }
 
 #siteSearch {
-  padding: 5px 8px;
-  font-size: 16px;
+  width: 140px;          /* ✅ fixed width */
+  max-width: 45vw;       /* ✅ mobile safe */
+  padding: 8px 10px;
+  font-size: 16px;       /* ✅ no auto zoom */
+  transition: none;      /* ✅ no animation */
 }
+
 
 .menu-btn {
   font-size: 20px;
