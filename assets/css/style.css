@@ -516,3 +516,32 @@ textarea,
 select {
   font-size: 16px !important;
 }
+
+.post-meta{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:10px;
+}
+.author-info{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.author-img{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+}
+.author-name{
+  font-weight:600;
+  display:block;
+}
+.published-by{
+  font-size:13px;
+  color:#666;
+}
+.post-date time{
+  font-size:13px;
+  color:#555;
+}
