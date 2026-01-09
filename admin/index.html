@@ -1,58 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
 <meta charset="UTF-8">
-<title>Admin Editor – Ncertcollege</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel – Ncertcollege</title>
 <meta name="robots" content="noindex,nofollow">
-<meta name="viewport" content="width=device-width,initial-scale=1">
 
-<link rel="stylesheet" href="/assets/css/style.css">
 <link rel="stylesheet" href="style.css">
-
-<style>
-#editor {
-  border:1px solid #ccc;
-  min-height:300px;
-  padding:15px;
-  background:#fff;
-}
-.output-box {
-  width:100%;
-  height:260px;
-  margin-top:10px;
-  font-family: monospace;
-}
-.toolbar button {
-  margin:2px;
-}
-</style>
 </head>
-
 <body>
 
-<h1>Create New Post</h1>
+<header class="admin-header">
+  <h1>✍️ Create New Post</h1>
+</header>
+
+<main class="admin-wrap">
 
 <label>Title</label>
-<input id="title">
+<input id="title" placeholder="Post Title">
 
 <label>Slug</label>
-<input id="slug">
+<input id="slug" placeholder="auto-generated">
 
 <label>Category</label>
 <select id="category"></select>
 
-<label>Tags (comma separated)</label>
-<input id="tags">
-
 <label>Author</label>
 <input id="author" value="Ncertcollege">
 
+<label>Publish Date</label>
+<input id="date" type="datetime-local">
+
+<label>Tags (comma separated)</label>
+<input id="tags" placeholder="tag1, tag2">
+
 <label>Thumbnail URL</label>
-<input id="thumbnail">
+<input id="thumbnail" placeholder="Image URL">
 
 <label>Thumbnail ALT</label>
-<input id="thumbAlt">
+<input id="thumbAlt" placeholder="ALT text">
 
+<!-- TOOLBAR -->
 <div class="toolbar">
   <button onclick="cmd('bold')"><b>B</b></button>
   <button onclick="cmd('italic')"><i>I</i></button>
@@ -60,21 +48,29 @@
   <button onclick="heading('h2')">H2</button>
   <button onclick="heading('h3')">H3</button>
   <button onclick="heading('h4')">H4</button>
-  <button onclick="addLink()">Link</button>
-  <button onclick="addImage()">Image</button>
+  <button onclick="addLink()">🔗</button>
+  <button onclick="addImage()">🖼</button>
+  <button onclick="addButton()">🔘</button>
 </div>
 
-<div id="editor" contenteditable="true" spellcheck="true" lang="hi"></div>
+<!-- EDITOR -->
+<div id="editor"
+     class="editor"
+     contenteditable="true"
+     spellcheck="true"
+     lang="hi"
+     placeholder="Start writing your post...">
+</div>
 
-<br>
+<!-- ACTIONSs -->
+<div class="actions">
+  <button class="preview-btn" onclick="preview()">Preview</button>
+  <button class="save-btn" onclick="saveLocal()">Save posts.json</button>
+</div>
 
-<button onclick="preview()">Preview</button>
-<button onclick="generateHTML()">Copy HTML</button>
-<button onclick="generateJSON()">Copy posts.json</button>
-
-<h3>Generated Output</h3>
-<textarea id="output" class="output-box"></textarea>
+</main>
 
 <script src="editor.js"></script>
+<script src="publish.js"></script>
 </body>
 </html>
