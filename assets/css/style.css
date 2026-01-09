@@ -1,108 +1,54 @@
-/* ==========================
-   RESET & GLOBAL STYLES
-========================== */
 html, body {
   max-width: 100%;
   overflow-x: hidden;
-  margin: 0;
-  background: #f4f6f8;
-  font-family: system-ui, sans-serif;
-  color: #222;
 }
+
 
 * {
   box-sizing: border-box;
+  font-family: system-ui, sans-serif;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
+body {
+  margin: 0;
+  background: #f4f6f8;
 }
 
-/* ==========================
-   CONTAINER GRID
-========================== */
+a { text-decoration: none; color: inherit; }
+
 .container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 16px;
   padding: 16px;
-  max-width: 900px;
-  margin: auto;
 }
 
-/* ===== JOIN BOX ===== */
+/* JOIN BOX */
 .join-box {
-  padding: 16px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  justify-content: center;
+  padding: 12px;
 }
 
-.join-box .join {
-  flex: 1 1 250px; /* responsive width */
+.join {
   background: #e9f7f6;
-  border-radius: 8px;
-  padding: 12px 16px;
+  border-radius: 6px;
+  padding: 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin-bottom: 10px;
 }
 
-.join-box .join:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-.join-box .join span {
-  font-weight: 600;
-  font-size: 14px;
-  color: #333;
-}
-
-.join-box .join a.btn {
-  padding: 8px 16px;
-  font-size: 14px;
-  font-weight: 600;
+.btn {
+  padding: 6px 14px;
   color: #fff;
-  border-radius: 6px;
-  text-decoration: none;
-  transition: background 0.2s ease;
+  border-radius: 4px;
+  font-size: 14px;
 }
 
-.join-box .join a.green {
-  background: #28a745;
-}
+.green { background: #28a745; }
+.blue { background: #007bff; }
 
-.join-box .join a.green:hover {
-  background: #218838;
-}
-
-.join-box .join a.blue {
-  background: #007bff;
-}
-
-.join-box .join a.blue:hover {
-  background: #0069d9;
-}
-
-/* MOBILE RESPONSIVE */
-@media (max-width: 600px) {
-  .join-box {
-    flex-direction: column;
-    gap: 10px;
-  }
-  .join-box .join {
-    flex: 1 1 100%;
-  }
-}
-
-
-/* ==========================
-   CATEGORY CARD
-========================== */
+/* CATEGORY CARD */
 .category-card {
   background: #fff;
   border-radius: 6px;
@@ -118,9 +64,34 @@ a {
   text-align: center;
 }
 
-/* ==========================
-   POSTS / ARTICLES
-========================== */
+.post {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.post:last-child {
+  border-bottom: none;
+}
+
+.post h4 {
+  font-size: 14px;
+  margin: 0 0 6px;
+}
+
+.meta {
+  font-size: 12px;
+  color: #555;
+}
+
+.read-more {
+  display: block;
+  background: #198754;
+  color: #fff;
+  text-align: center;
+  padding: 8px;
+  font-size: 14px;
+}
+
 .post-container {
   background: #fff;
   margin: 10px;
@@ -134,12 +105,11 @@ a {
 }
 
 .post-image {
-  width: 100%;
-  max-width: 800px;
+  width: 100%;       /* screen width ke hisab se */
+  max-width: 800px;  /* max size */
   height: auto;
-  margin: 0 auto 10px;
-  padding: 10px 0;
-  display: block;
+  margin: 0 auto;
+padding: 10px;
 }
 
 .apply-btn {
@@ -169,18 +139,14 @@ a {
   margin-bottom: 14px;
 }
 
-.post-content h2,
-.post-content h3,
-.post-content h4 {
+.post-content h2 {
+  font-size: 16px;
   margin-top: 18px;
-  font-weight: 600;
-  color: #198754;
 }
 
 .post-content ul,
 .post-content ol {
   padding-left: 18px;
-  margin-bottom: 12px;
 }
 
 .share-box {
@@ -191,12 +157,8 @@ a {
 .share-box a {
   margin-right: 8px;
   color: #198754;
-  font-weight: 600;
 }
 
-/* ==========================
-   AUTHOR BOX
-========================== */
 .author-box {
   display: flex;
   gap: 10px;
@@ -204,7 +166,6 @@ a {
   padding: 10px;
   border-radius: 6px;
   margin-top: 20px;
-  align-items: center;
 }
 
 .author-box img {
@@ -213,9 +174,6 @@ a {
   border-radius: 50%;
 }
 
-/* ==========================
-   RELATED POSTS / TAGS
-========================== */
 .related-posts {
   margin-top: 20px;
 }
@@ -226,33 +184,6 @@ a {
   color: #198754;
 }
 
-.post-tags {
-  margin-top: 24px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.tag-chip {
-  padding: 8px 16px;
-  font-size: 14px;
-  font-weight: 500;
-  border-radius: 999px;
-  background: linear-gradient(145deg, #ffffff, #e5e5e5);
-  box-shadow: 4px 4px 8px rgba(0,0,0,0.18), -4px -4px 8px rgba(255,255,255,0.9);
-  color: #333;
-  text-decoration: none;
-  transition: all 0.25s ease;
-}
-
-.tag-chip:hover {
-  transform: translateY(-2px);
-  box-shadow: 6px 6px 12px rgba(0,0,0,0.22), -6px -6px 12px rgba(255,255,255,1);
-}
-
-/* ==========================
-   LOGO & HEADER
-========================== */
 .logo-wrap {
   display: flex;
   align-items: center;
@@ -270,16 +201,23 @@ a {
   color: #198754;
 }
 
+/* HEADER */
 .site-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 14px;
-  background: #fff;
+  background: #ffffff;
   border-bottom: 1px solid #ddd;
   position: sticky;
   top: 0;
   z-index: 999;
+}
+
+.logo {
+  font-size: 16px;
+  font-weight: bold;
+  color: #198754;
 }
 
 .header-left .logo {
@@ -293,12 +231,13 @@ a {
 }
 
 #siteSearch {
-  width: 140px;
-  max-width: 45vw;
+  width: 140px;          /* ✅ fixed width */
+  max-width: 45vw;       /* ✅ mobile safe */
   padding: 8px 10px;
-  font-size: 16px;
-  transition: none;
+  font-size: 16px;       /* ✅ no auto zoom */
+  transition: none;      /* ✅ no animation */
 }
+
 
 .menu-btn {
   font-size: 20px;
@@ -306,9 +245,7 @@ a {
   border: none;
 }
 
-/* ==========================
-   MOBILE MENU
-========================== */
+/* MOBILE MENU */
 .mobile-menu {
   position: fixed;
   top: 0;
@@ -339,9 +276,7 @@ a {
   float: right;
 }
 
-/* ==========================
-   FOOTER
-========================== */
+/* FOOTER */
 .site-footer {
   text-align: center;
   padding: 12px;
@@ -350,9 +285,7 @@ a {
   font-size: 13px;
 }
 
-/* ==========================
-   AD OVERLAY
-========================== */
+/* ===== Ad Overlay ===== */
 .ad-overlay {
   position: fixed;
   inset: 0;
@@ -418,9 +351,53 @@ a {
   line-height: 20px;
 }
 
-/* ==========================
+/* =========================
+   CATEGORY / TAG PAGE
+========================= */
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 12px;
+}
+
+.page-title {
+  font-size: 24px;
+  margin-bottom: 16px;
+  font-weight: bold;
+}
+
+.post-card {
+  background: #fff;
+  padding: 14px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.06);
+}
+
+.post-card h2 {
+  font-size: 18px;
+  margin: 0 0 6px;
+}
+
+.post-card a {
+  text-decoration: none;
+  color: #111;
+}
+
+.post-card a:hover {
+  color: #198754;
+}
+
+.meta {
+  font-size: 13px;
+  color: #666;
+}
+
+/* =========================
    404 PAGE
-========================== */
+========================= */
+
 .error-page {
   text-align: center;
   padding: 40px 10px;
@@ -437,10 +414,9 @@ a {
   color: #555;
   margin-bottom: 20px;
 }
-
-/* ==========================
-   ABOUT / COMMON SECTIONS
-========================== */
+/*==========================
+comon area about
+==========================*/
 .site-info {
   padding: 16px;
 }
@@ -470,12 +446,40 @@ a {
   text-decoration: none;
 }
 
-/* ==========================
-   PUSH BANNER
-========================== */
+/*================
+tag 3d
+===============*/
+.post-tags {
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tag-chip {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 999px;
+  background: linear-gradient(145deg, #ffffff, #e5e5e5);
+  box-shadow:
+    4px 4px 8px rgba(0,0,0,0.18),
+   -4px -4px 8px rgba(255,255,255,0.9);
+  color: #333;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.tag-chip:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    6px 6px 12px rgba(0,0,0,0.22),
+   -6px -6px 12px rgba(255,255,255,1);
+}
+
 #push-banner {
   position: fixed;
-  bottom: 80px;
+  bottom: 80px; /* Footer se thoda upar */
   left: 50%;
   transform: translateX(-50%);
   background-color: #ffd700;
@@ -504,9 +508,11 @@ a {
   background-color: #e64a19;
 }
 
-/* ==========================
-   PREVENT MOBILE AUTO-ZOOM
-========================== */
-input, textarea, select {
+/* ===============================
+   PREVENT MOBILE AUTO ZOOM
+================================ */
+input,
+textarea,
+select {
   font-size: 16px !important;
 }
