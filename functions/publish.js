@@ -1,58 +1,52 @@
-export async function onRequestPost({ request, env }) {
-  try {
-    const data = await request.json();
-    const { filePath, content, message } = data;
+export default {
+  async fetch(request, env) {
 
-    const apiUrl = `https://api.github.com/repos/${env.GITHUB_USER}/${env.GITHUB_REPO}/contents/${filePath}`;
-
-    let sha = null;
-
-    // Check if file already exists
-    const check = await fetch(apiUrl, {
-      headers: {
-        Authorization: `token ${env.GITHUB_TOKEN}`,
-        "User-Agent": "Cloudflare-Pages"
-      }
-    });
-
-    if (check.ok) {
-      const json = await check.json();
-      sha = json.sha;
-    }
-
-    const body = {
-      message: message || "New post publish",
-      content: btoa(unescape(encodeURIComponent(content))),
-      branch: "main"
-    };
-
-    if (sha) body.sha = sha;
-
-    const push = await fetch(apiUrl, {
-      method: "PUT",
-      headers: {
-        Authorization: `token ${env.GITHUB_TOKEN}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(body)
-    });
-
-    if (!push.ok) {
+    // ❌ POST ke alawa sab block
+    if (request.method !== "POST") {
       return new Response(
-        JSON.stringify({ error: "GitHub push failed" }),
-        { status: 500 }
+        JSON.stringify({ error: "Method Not Allowed" }),
+        { status: 405, headers: { "Content-Type": "application/json" } }
       );
     }
 
-    return new Response(
-      JSON.stringify({ success: true }),
-      { status: 200 }
-    );
+    try {
+      const post = await request.json();
 
-  } catch (err) {
-    return new Response(
-      JSON.stringify({ error: err.message }),
-      { status: 500 }
-    );
+      if (!post.title || !post.slug || !post.content) {
+        return new Response(
+          JSON.stringify({ error: "Invalid post data" }),
+          { status: 400, headers: { "Content-Type": "application/json" } }
+        );
+      }
+
+      const year = post.year;
+      const month = post.month;
+
+      const filePath = `news/${year}/${month}/${post.slug}.html`;
+
+      return new Response(
+        JSON.stringify({
+          success: true,
+          message: "Post received successfully",
+          url: `https://ncertcollege.com/${filePath}`
+        }),
+        {
+          status: 200,
+          headers: { "Content-Type": "application/json" }
+        }
+      );
+
+    } catch (err) {
+      return new Response(
+        JSON.stringify({
+          error: "Server error",
+          details: err.message
+        }),
+        {
+          status: 500,
+          headers: { "Content-Type": "application/json" }
+        }
+      );
+    }
   }
-}
+};
