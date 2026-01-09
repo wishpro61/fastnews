@@ -65,16 +65,9 @@
 
 <!-- ================= FOOTER ================= -->
 <div data-include="/partials/footer.html"></div>
-<script type="module" src="/push.js"></script>
 
-<!-- ================= SERVICE WORKER ================= -->
-<script>
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", function () {
-    navigator.serviceWorker.register("/firebase-messaging-sw.js");
-  });
-}
-</script>
+<!-- ================= PUSH ================= -->
+<script type="module" src="/push.js"></script>
 
 </body>
 </html>
