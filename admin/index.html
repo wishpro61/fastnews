@@ -1,16 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
 <meta charset="UTF-8">
 <title>Admin Panel – Ncertcollege</title>
 <meta name="robots" content="noindex,nofollow">
+
 <link rel="stylesheet" href="style.css">
-<style>
-/* Spellcheck red underline */
-[contenteditable="true"][spellcheck="true"] {
-  outline: none;
-}
-</style>
+
 </head>
 <body>
 
@@ -23,7 +19,9 @@
 <input id="slug" placeholder="auto-generated from title">
 
 <label>Category</label>
-<select id="category"></select>
+<select id="category">
+  <option value="">Loading categories…</option>
+</select>
 
 <label>Tags (comma separated)</label>
 <input id="tags" placeholder="tag1, tag2">
@@ -31,8 +29,8 @@
 <label>Thumbnail URL</label>
 <input id="thumbnail" placeholder="Image URL">
 
-<label>Thumbnail ALT / Title</label>
-<input id="thumbAlt" placeholder="ALT text for image">
+<label>Thumbnail ALT</label>
+<input id="thumbAlt" placeholder="ALT text">
 
 <div class="toolbar">
   <button onclick="cmd('bold')"><b>B</b></button>
@@ -41,18 +39,24 @@
   <button onclick="heading('h2')">H2</button>
   <button onclick="heading('h3')">H3</button>
   <button onclick="heading('h4')">H4</button>
-  <button onclick="heading('h5')">H5</button>
-  <button onclick="heading('h6')">H6</button>
   <button onclick="addLink()">Link</button>
   <button onclick="addImage()">Image</button>
   <button onclick="addButton()">Button</button>
-  <button onclick="addEmbed()">Embed</button>
 </div>
 
-<div id="editor" contenteditable="true" spellcheck="true" lang="hi" style="border:1px solid #ccc; min-height:300px; padding:15px; background:#fff;"></div>
+<div id="editor"
+     contenteditable="true"
+     spellcheck="true"
+     lang="hi"
+     class="editor">
+</div>
 
+<div class="actions">
+  <button onclick="preview()">Preview</button>
+  <button onclick="saveLocal()">Save (posts.json)</button>
+</div>
 
-<button onclick="preview()">Preview</button>
-<button onclick="saveLocal()">Save HTML</button>
+<script src="editor.js"></script>
+<script src="publish.js"></script>
 </body>
 </html>
