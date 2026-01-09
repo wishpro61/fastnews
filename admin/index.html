@@ -5,45 +5,51 @@
 <title>Admin Panel – Ncertcollege</title>
 <meta name="robots" content="noindex,nofollow">
 <link rel="stylesheet" href="style.css">
+<style>
+/* Spellcheck red underline */
+[contenteditable="true"][spellcheck="true"] {
+  outline: none;
+}
+</style>
 </head>
 <body>
 
 <h1>Create New Post</h1>
 
 <label>Title</label>
-<input id="title">
+<input id="title" placeholder="Post Title">
 
 <label>Slug</label>
-<input id="slug">
+<input id="slug" placeholder="auto-generated from title">
 
 <label>Category</label>
 <select id="category"></select>
 
 <label>Tags (comma separated)</label>
-<input id="tags">
+<input id="tags" placeholder="tag1, tag2">
 
 <label>Thumbnail URL</label>
-<input id="thumbnail">
+<input id="thumbnail" placeholder="Image URL">
 
-<label>Thumbnail ALT</label>
-<input id="thumbAlt">
+<label>Thumbnail ALT / Title</label>
+<input id="thumbAlt" placeholder="ALT text for image">
 
 <div class="toolbar">
-  <button onclick="cmd('bold')">B</button>
-  <button onclick="cmd('italic')">I</button>
-  <button onclick="cmd('underline')">U</button>
-
+  <button onclick="cmd('bold')"><b>B</b></button>
+  <button onclick="cmd('italic')"><i>I</i></button>
+  <button onclick="cmd('underline')"><u>U</u></button>
   <button onclick="heading('h2')">H2</button>
   <button onclick="heading('h3')">H3</button>
   <button onclick="heading('h4')">H4</button>
-
+  <button onclick="heading('h5')">H5</button>
+  <button onclick="heading('h6')">H6</button>
   <button onclick="addLink()">Link</button>
   <button onclick="addImage()">Image</button>
   <button onclick="addButton()">Button</button>
   <button onclick="addEmbed()">Embed</button>
 </div>
 
-<div id="editor" contenteditable="true"></div>
+<div id="editor" contenteditable="true" spellcheck="true" lang="hi" style="border:1px solid #ccc; min-height:300px; padding:15px; background:#fff;"></div>
 
 <button onclick="preview()">Preview</button>
 <button onclick="publish()">Publish</button>

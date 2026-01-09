@@ -1,31 +1,43 @@
+/* ==========================
+   RESET & GLOBAL STYLES
+========================== */
 html, body {
   max-width: 100%;
   overflow-x: hidden;
+  margin: 0;
+  background: #f4f6f8;
+  font-family: system-ui, sans-serif;
+  color: #222;
 }
-
 
 * {
   box-sizing: border-box;
-  font-family: system-ui, sans-serif;
 }
 
-body {
-  margin: 0;
-  background: #f4f6f8;
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
-a { text-decoration: none; color: inherit; }
-
+/* ==========================
+   CONTAINER GRID
+========================== */
 .container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 16px;
   padding: 16px;
+  max-width: 900px;
+  margin: auto;
 }
 
-/* JOIN BOX */
+/* ==========================
+   JOIN BOX
+========================== */
 .join-box {
-  padding: 12px;
+  display: flex;
+  gap: 10px;
+  padding: 12px 0;
 }
 
 .join {
@@ -48,7 +60,9 @@ a { text-decoration: none; color: inherit; }
 .green { background: #28a745; }
 .blue { background: #007bff; }
 
-/* CATEGORY CARD */
+/* ==========================
+   CATEGORY CARD
+========================== */
 .category-card {
   background: #fff;
   border-radius: 6px;
@@ -64,34 +78,9 @@ a { text-decoration: none; color: inherit; }
   text-align: center;
 }
 
-.post {
-  padding: 10px;
-  border-bottom: 1px solid #eee;
-}
-
-.post:last-child {
-  border-bottom: none;
-}
-
-.post h4 {
-  font-size: 14px;
-  margin: 0 0 6px;
-}
-
-.meta {
-  font-size: 12px;
-  color: #555;
-}
-
-.read-more {
-  display: block;
-  background: #198754;
-  color: #fff;
-  text-align: center;
-  padding: 8px;
-  font-size: 14px;
-}
-
+/* ==========================
+   POSTS / ARTICLES
+========================== */
 .post-container {
   background: #fff;
   margin: 10px;
@@ -105,11 +94,12 @@ a { text-decoration: none; color: inherit; }
 }
 
 .post-image {
-  width: 100%;       /* screen width ke hisab se */
-  max-width: 800px;  /* max size */
+  width: 100%;
+  max-width: 800px;
   height: auto;
-  margin: 0 auto;
-padding: 10px;
+  margin: 0 auto 10px;
+  padding: 10px 0;
+  display: block;
 }
 
 .apply-btn {
@@ -139,14 +129,18 @@ padding: 10px;
   margin-bottom: 14px;
 }
 
-.post-content h2 {
-  font-size: 16px;
+.post-content h2,
+.post-content h3,
+.post-content h4 {
   margin-top: 18px;
+  font-weight: 600;
+  color: #198754;
 }
 
 .post-content ul,
 .post-content ol {
   padding-left: 18px;
+  margin-bottom: 12px;
 }
 
 .share-box {
@@ -157,8 +151,12 @@ padding: 10px;
 .share-box a {
   margin-right: 8px;
   color: #198754;
+  font-weight: 600;
 }
 
+/* ==========================
+   AUTHOR BOX
+========================== */
 .author-box {
   display: flex;
   gap: 10px;
@@ -166,6 +164,7 @@ padding: 10px;
   padding: 10px;
   border-radius: 6px;
   margin-top: 20px;
+  align-items: center;
 }
 
 .author-box img {
@@ -174,6 +173,9 @@ padding: 10px;
   border-radius: 50%;
 }
 
+/* ==========================
+   RELATED POSTS / TAGS
+========================== */
 .related-posts {
   margin-top: 20px;
 }
@@ -184,6 +186,33 @@ padding: 10px;
   color: #198754;
 }
 
+.post-tags {
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tag-chip {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 999px;
+  background: linear-gradient(145deg, #ffffff, #e5e5e5);
+  box-shadow: 4px 4px 8px rgba(0,0,0,0.18), -4px -4px 8px rgba(255,255,255,0.9);
+  color: #333;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.tag-chip:hover {
+  transform: translateY(-2px);
+  box-shadow: 6px 6px 12px rgba(0,0,0,0.22), -6px -6px 12px rgba(255,255,255,1);
+}
+
+/* ==========================
+   LOGO & HEADER
+========================== */
 .logo-wrap {
   display: flex;
   align-items: center;
@@ -201,23 +230,16 @@ padding: 10px;
   color: #198754;
 }
 
-/* HEADER */
 .site-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 14px;
-  background: #ffffff;
+  background: #fff;
   border-bottom: 1px solid #ddd;
   position: sticky;
   top: 0;
   z-index: 999;
-}
-
-.logo {
-  font-size: 16px;
-  font-weight: bold;
-  color: #198754;
 }
 
 .header-left .logo {
@@ -231,13 +253,12 @@ padding: 10px;
 }
 
 #siteSearch {
-  width: 140px;          /* ✅ fixed width */
-  max-width: 45vw;       /* ✅ mobile safe */
+  width: 140px;
+  max-width: 45vw;
   padding: 8px 10px;
-  font-size: 16px;       /* ✅ no auto zoom */
-  transition: none;      /* ✅ no animation */
+  font-size: 16px;
+  transition: none;
 }
-
 
 .menu-btn {
   font-size: 20px;
@@ -245,7 +266,9 @@ padding: 10px;
   border: none;
 }
 
-/* MOBILE MENU */
+/* ==========================
+   MOBILE MENU
+========================== */
 .mobile-menu {
   position: fixed;
   top: 0;
@@ -276,7 +299,9 @@ padding: 10px;
   float: right;
 }
 
-/* FOOTER */
+/* ==========================
+   FOOTER
+========================== */
 .site-footer {
   text-align: center;
   padding: 12px;
@@ -285,7 +310,9 @@ padding: 10px;
   font-size: 13px;
 }
 
-/* ===== Ad Overlay ===== */
+/* ==========================
+   AD OVERLAY
+========================== */
 .ad-overlay {
   position: fixed;
   inset: 0;
@@ -351,53 +378,9 @@ padding: 10px;
   line-height: 20px;
 }
 
-/* =========================
-   CATEGORY / TAG PAGE
-========================= */
-
-.container {
-  max-width: 900px;
-  margin: auto;
-  padding: 12px;
-}
-
-.page-title {
-  font-size: 24px;
-  margin-bottom: 16px;
-  font-weight: bold;
-}
-
-.post-card {
-  background: #fff;
-  padding: 14px;
-  margin-bottom: 12px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,.06);
-}
-
-.post-card h2 {
-  font-size: 18px;
-  margin: 0 0 6px;
-}
-
-.post-card a {
-  text-decoration: none;
-  color: #111;
-}
-
-.post-card a:hover {
-  color: #198754;
-}
-
-.meta {
-  font-size: 13px;
-  color: #666;
-}
-
-/* =========================
+/* ==========================
    404 PAGE
-========================= */
-
+========================== */
 .error-page {
   text-align: center;
   padding: 40px 10px;
@@ -414,9 +397,10 @@ padding: 10px;
   color: #555;
   margin-bottom: 20px;
 }
-/*==========================
-comon area about
-==========================*/
+
+/* ==========================
+   ABOUT / COMMON SECTIONS
+========================== */
 .site-info {
   padding: 16px;
 }
@@ -446,40 +430,12 @@ comon area about
   text-decoration: none;
 }
 
-/*================
-tag 3d
-===============*/
-.post-tags {
-  margin-top: 24px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.tag-chip {
-  padding: 8px 16px;
-  font-size: 14px;
-  font-weight: 500;
-  border-radius: 999px;
-  background: linear-gradient(145deg, #ffffff, #e5e5e5);
-  box-shadow:
-    4px 4px 8px rgba(0,0,0,0.18),
-   -4px -4px 8px rgba(255,255,255,0.9);
-  color: #333;
-  text-decoration: none;
-  transition: all 0.25s ease;
-}
-
-.tag-chip:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    6px 6px 12px rgba(0,0,0,0.22),
-   -6px -6px 12px rgba(255,255,255,1);
-}
-
+/* ==========================
+   PUSH BANNER
+========================== */
 #push-banner {
   position: fixed;
-  bottom: 80px; /* Footer se thoda upar */
+  bottom: 80px;
   left: 50%;
   transform: translateX(-50%);
   background-color: #ffd700;
@@ -508,11 +464,9 @@ tag 3d
   background-color: #e64a19;
 }
 
-/* ===============================
-   PREVENT MOBILE AUTO ZOOM
-================================ */
-input,
-textarea,
-select {
+/* ==========================
+   PREVENT MOBILE AUTO-ZOOM
+========================== */
+input, textarea, select {
   font-size: 16px !important;
 }

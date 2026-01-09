@@ -1,19 +1,51 @@
+/* ===== ADMIN PANEL ===== */
 body {
   font-family: Arial, sans-serif;
-  padding: 20px;
   background: #f4f4f4;
+  padding: 20px;
+  color: #222;
 }
 
-input, select {
+h1 {
+  margin-bottom: 20px;
+  font-size: 28px;
+  color: #198754;
+}
+
+label {
+  display: block;
+  margin: 10px 0 4px;
+  font-weight: bold;
+}
+
+input, select, textarea {
   width: 100%;
   padding: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.toolbar {
+  margin: 10px 0;
 }
 
 .toolbar button {
   padding: 6px 10px;
-  margin: 3px;
+  margin: 3px 3px 3px 0;
   cursor: pointer;
+  border-radius: 4px;
+  border: 1px solid #198754;
+  background: #fff;
+  color: #198754;
+  font-weight: bold;
+  transition: all 0.2s;
+}
+
+.toolbar button:hover {
+  background: #198754;
+  color: #fff;
 }
 
 #editor {
@@ -21,9 +53,51 @@ input, select {
   min-height: 300px;
   padding: 15px;
   border: 1px solid #ccc;
+  border-radius: 6px;
+  overflow-y: auto;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+#editor img {
+  max-width: 100%;
+  height: auto;
+  margin: 10px 0;
+}
+
+.btn {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 6px;
+  background: #198754;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 button {
   padding: 10px 15px;
   margin-top: 10px;
+  border: none;
+  background: #28a745;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background: #198754;
+}
+
+input::placeholder {
+  color: #aaa;
+  font-style: italic;
+}
+
+/* Spellcheck red underline */
+[contenteditable="true"][spellcheck="true"] {
+  outline: none;
+  white-space: pre-wrap;
 }

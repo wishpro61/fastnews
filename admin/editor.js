@@ -1,4 +1,4 @@
-// category load
+// Load categories from JSON
 fetch("../data/categories.json")
 .then(res => res.json())
 .then(data => {
@@ -11,11 +11,14 @@ fetch("../data/categories.json")
   });
 });
 
-// slug auto
+// Slug auto-generate from title
+const title = document.getElementById("title");
+const slug = document.getElementById("slug");
 title.oninput = () => {
   slug.value = title.value.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 };
 
+// Text formatting commands
 function cmd(command) {
   document.execCommand(command, false, null);
 }
@@ -25,37 +28,23 @@ function heading(tag) {
 }
 
 function addLink() {
-  const url = prompt("Enter URL");
-  if (url) document.execCommand("createLink", false, url);
+  const url = prompt("Enter URL:");
+  if(url) document.execCommand("createLink", false, url);
 }
 
 function addImage() {
-  const url = prompt("Image URL");
-  const alt = prompt("ALT text");
-  if (url) {
-    document.execCommand(
-      "insertHTML",
-      false,
-      `<img src="${url}" alt="${alt}" title="${alt}" loading="lazy">`
-    );
-  }
+  const url = prompt("Enter Image URL:");
+  const alt = prompt("ALT text / Title:");
+  if(url) document.execCommand("insertHTML", false, `<img src="${url}" alt="${alt}" title="${alt}" loading="lazy">`);
 }
 
 function addButton() {
-  const text = prompt("Button Text");
-  const url = prompt("Button URL");
-  if (text && url) {
-    document.execCommand(
-      "insertHTML",
-      false,
-      `<a href="${url}" class="btn">${text}</a>`
-    );
-  }
+  const text = prompt("Button Text:");
+  const url = prompt("Button URL:");
+  if(text && url) document.execCommand("insertHTML", false, `<a href="${url}" class="btn">${text}</a>`);
 }
 
 function addEmbed() {
-  const code = prompt("Paste embed iframe");
-  if (code) {
-    document.execCommand("insertHTML", false, code);
-  }
+  const code = prompt("Paste embed iframe or code:");
+  if(code) document.execCommand("insertHTML", false, code);
 }
