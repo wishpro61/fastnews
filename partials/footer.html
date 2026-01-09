@@ -1,13 +1,25 @@
-<!-- Sticky Push Banner -->
-<div id="push-banner">
+<!-- ================= STICKY PUSH BANNER ================= -->
+<div id="push-banner" style="display:none; position:fixed; bottom:15px; left:15px; right:15px; background:#0d6efd; color:#fff; padding:12px; border-radius:8px; text-align:center; z-index:9999;">
   <span>🔔 Get latest news alerts!</span>
-  <button id="push-enable-btn" class="btn orange">Enable</button>
+  <button id="push-enable-btn" class="btn orange" style="margin-left:10px; padding:6px 12px; border:none; border-radius:4px; background:#fff; color:#0d6efd; font-weight:bold;">
+    Enable
+  </button>
 </div>
 
-<footer class="site-footer">
+<!-- ================= FOOTER ================= -->
+<footer class="site-footer" style="text-align:center; padding:15px 0; background:#f8f8f8; color:#333;">
   <p>© <span id="year"></span> NcertCollege. All Rights Reserved.</p>
 </footer>
 
 <script>
+  // Auto update year
   document.getElementById("year").innerText = new Date().getFullYear();
+
+  // Show push banner only if not already enabled
+  document.addEventListener("DOMContentLoaded", () => {
+    const banner = document.getElementById("push-banner");
+    if (banner && localStorage.getItem("push-enabled") !== "true") {
+      banner.style.display = "block";
+    }
+  });
 </script>

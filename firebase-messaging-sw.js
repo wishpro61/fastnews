@@ -1,5 +1,5 @@
 // ===============================
-// PWA + Firebase Service Worker
+// PWA + Firebase Service Worker (Fixed)
 // ===============================
 const CACHE_NAME = "ncertcollege-pwa-v1";
 
@@ -38,7 +38,12 @@ self.addEventListener("fetch", (event) => {
 self.addEventListener("push", (event) => {
   if (!event.data) return;
 
-  const data = event.data.json();
+  let data = {};
+  try {
+    data = event.data.json();
+  } catch (err) {
+    data = { title: "NcertCollege Update", body: event.data.text(), url: "/" };
+  }
 
   const title = data.title || "NcertCollege Update";
   const options = {
@@ -50,9 +55,7 @@ self.addEventListener("push", (event) => {
     }
   };
 
-  event.waitUntil(
-    self.registration.showNotification(title, options)
-  );
+  event.waitUntil(self.registration.showNotification(title, options));
 });
 
 // -------------------------------
@@ -64,16 +67,25 @@ self.addEventListener("notificationclick", (event) => {
   const urlToOpen = event.notification.data.url || "/";
 
   event.waitUntil(
-    clients.matchAll({ type: "window", includeUncontrolled: true })
-      .then((clientList) => {
-        for (const client of clientList) {
-          if (client.url === urlToOpen && "focus" in client) {
-            return client.focus();
-          }
+    clients.matchAll({ type: "window", includeUncontrolled: true }).then((clientList) => {
+      // Check if tab with same URL is already open
+      for (const client of clientList) {
+        if (client.url === urlToOpen && "focus" in client) {
+          return client.focus();
         }
-        if (clients.openWindow) {
-          return clients.openWindow(urlToOpen);
-        }
-      })
+      }
+      // If not, open a new tab
+      if (clients.openWindow) {
+        return clients.openWindow(urlToOpen);
+      }
+    })
   );
+});
+
+// -------------------------------
+// OPTIONAL: Generic notification fallback
+// -------------------------------
+self.addEventListener("pushsubscriptionchange", async (event) => {
+  console.log("🔄 Push subscription changed:", event);
+  // You can re-subscribe here if needed
 });

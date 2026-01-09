@@ -1,5 +1,5 @@
 // ===============================
-// push.js (Working ES Module)
+// push.js (Fixed ES Module)
 // ===============================
 
 // Firebase imports (v9)
@@ -100,20 +100,39 @@ export async function enablePush() {
 }
 
 // ===============================
-// Attach button click + auto-hide
+// Init push button after DOM + footer loaded
 // ===============================
-document.addEventListener("DOMContentLoaded", () => {
+function initPushButton() {
   const btn = document.getElementById("push-enable-btn");
   const banner = document.getElementById("push-banner");
 
-  if (btn) btn.addEventListener("click", enablePush);
+  if (!btn) return;
 
-  // Hide banner if already enabled
+  btn.addEventListener("click", enablePush);
+
+  // Auto-hide if already enabled
   if (localStorage.getItem("push-enabled") === "true" && banner) {
     banner.style.display = "none";
+  }
+}
+
+// Run after DOM load + footer partial load
+document.addEventListener("DOMContentLoaded", () => {
+  // If footer is already loaded
+  if (document.getElementById("push-enable-btn")) {
+    initPushButton();
+  } else {
+    // Wait until footer is loaded dynamically
+    const observer = new MutationObserver(() => {
+      if (document.getElementById("push-enable-btn")) {
+        initPushButton();
+        observer.disconnect();
+      }
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
   }
 });
 
 // ===============================
-// Expose globally (optional)
+// Expose globally
 window.enablePush = enablePush;

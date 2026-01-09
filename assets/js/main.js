@@ -38,8 +38,21 @@ async function loadPartials() {
     }
   }
 
+  // Initialize menu & search after partials load
   if (typeof initMenu === "function") initMenu();
   if (typeof initSearch === "function") initSearch();
+
+  // Initialize push button after footer is loaded
+  if (typeof window.enablePush === "function") {
+    const btn = document.getElementById("push-enable-btn");
+    const banner = document.getElementById("push-banner");
+
+    if (btn) btn.addEventListener("click", window.enablePush);
+
+    if (localStorage.getItem("push-enabled") === "true" && banner) {
+      banner.style.display = "none";
+    }
+  }
 }
 
 loadPartials();
@@ -177,10 +190,7 @@ window.addEventListener("beforeinstallprompt", (e) => {
   const waitForBanner = setInterval(() => {
     const banner = document.getElementById("installBanner");
 
-    if (
-      banner &&
-      !window.matchMedia("(display-mode: standalone)").matches
-    ) {
+    if (banner && !window.matchMedia("(display-mode: standalone)").matches) {
       banner.style.display = "block";
       clearInterval(waitForBanner);
     }
