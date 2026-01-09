@@ -31,34 +31,74 @@ a {
   margin: auto;
 }
 
-/* ==========================
-   JOIN BOX
-========================== */
+/* ===== JOIN BOX ===== */
 .join-box {
+  padding: 16px;
   display: flex;
-  gap: 10px;
-  padding: 12px 0;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
 }
 
-.join {
+.join-box .join {
+  flex: 1 1 250px; /* responsive width */
   background: #e9f7f6;
-  border-radius: 6px;
-  padding: 12px;
+  border-radius: 8px;
+  padding: 12px 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.btn {
-  padding: 6px 14px;
-  color: #fff;
-  border-radius: 4px;
+.join-box .join:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.join-box .join span {
+  font-weight: 600;
   font-size: 14px;
+  color: #333;
 }
 
-.green { background: #28a745; }
-.blue { background: #007bff; }
+.join-box .join a.btn {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.join-box .join a.green {
+  background: #28a745;
+}
+
+.join-box .join a.green:hover {
+  background: #218838;
+}
+
+.join-box .join a.blue {
+  background: #007bff;
+}
+
+.join-box .join a.blue:hover {
+  background: #0069d9;
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 600px) {
+  .join-box {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .join-box .join {
+    flex: 1 1 100%;
+  }
+}
+
 
 /* ==========================
    CATEGORY CARD
