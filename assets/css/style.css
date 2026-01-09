@@ -497,3 +497,12 @@ tag 3d
 #push-banner button:hover {
   background-color: #e64a19;
 }
+
+/* ===============================
+   PREVENT MOBILE AUTO ZOOM
+================================ */
+input,
+textarea,
+select {
+  font-size: 16px !important;
+}
