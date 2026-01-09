@@ -19,7 +19,8 @@ const firebaseConfig = {
   appId: "1:435786162332:web:6669c8056fd022f1378d5"
 };
 
-const VAPID_KEY = "BNzK5Gc-peJ4dkSg1HNUaqj50a2nY8G";
+const VAPID_KEY = "BNzK5Gc-peJ4dkSg1HNUaqj50a2nY8GbznqxJ-I_ZPjX4CHP2wixWSS9iUutSOBv7YA3ZZTDWVk17ptoSaTdCO4";
+
 
 // ===============================
 // Initialize Firebase
