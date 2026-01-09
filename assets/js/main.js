@@ -34,7 +34,7 @@ async function loadPartials() {
       const el = document.getElementById(p.id);
       if (el) el.innerHTML = html;
     } catch (e) {
-      console.error("Partial load failed:", e);
+      console.error("❌ Partial load failed:", e);
     }
   }
 
@@ -50,14 +50,11 @@ loadPartials();
 fetch("/data/posts.json")
   .then(res => res.json())
   .then(posts => {
-
     const container = document.getElementById("homeCategories");
     if (!container) return;
 
-    /* 🔥 latest first */
     posts.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-    /* FINAL SEO CATEGORIES */
     const categories = {
       "sarkari-yojana": "सरकारी योजनाएं",
       "education": "शिक्षा अपडेट",
@@ -95,7 +92,7 @@ fetch("/data/posts.json")
       container.insertAdjacentHTML("beforeend", html);
     }
   })
-  .catch(err => console.error("posts.json load error:", err));
+  .catch(err => console.error("❌ posts.json load error:", err));
 
 /* ===============================
    MOBILE MENU INIT
@@ -168,21 +165,29 @@ function initMenu() {
   }, 1000);
 })();
 
-let deferredPrompt;
+/* ===============================
+   PWA INSTALL BANNER (FIXED)
+================================ */
+let deferredPrompt = null;
 
-/* Show install banner */
 window.addEventListener("beforeinstallprompt", (e) => {
   e.preventDefault();
   deferredPrompt = e;
 
-  // Agar app pehle se install nahi hai
-  if (!window.matchMedia("(display-mode: standalone)").matches) {
+  const waitForBanner = setInterval(() => {
     const banner = document.getElementById("installBanner");
-    if (banner) banner.style.display = "block";
-  }
+
+    if (
+      banner &&
+      !window.matchMedia("(display-mode: standalone)").matches
+    ) {
+      banner.style.display = "block";
+      clearInterval(waitForBanner);
+    }
+  }, 300);
 });
 
-/* Install click */
+/* Install button click */
 document.addEventListener("click", async (e) => {
   if (e.target.id === "installBtn" && deferredPrompt) {
     deferredPrompt.prompt();
