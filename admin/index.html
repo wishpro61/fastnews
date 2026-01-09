@@ -2,26 +2,34 @@
 <html lang="hi">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Panel – Ncertcollege</title>
 <meta name="robots" content="noindex,nofollow">
 
 <link rel="stylesheet" href="style.css">
-
 </head>
 <body>
 
-<h1>Create New Post</h1>
+<header class="admin-header">
+  <h1>✍️ Create New Post</h1>
+</header>
+
+<main class="admin-wrap">
 
 <label>Title</label>
 <input id="title" placeholder="Post Title">
 
 <label>Slug</label>
-<input id="slug" placeholder="auto-generated from title">
+<input id="slug" placeholder="auto-generated">
 
 <label>Category</label>
-<select id="category">
-  <option value="">Loading categories…</option>
-</select>
+<select id="category"></select>
+
+<label>Author</label>
+<input id="author" value="Ncertcollege">
+
+<label>Publish Date</label>
+<input id="date" type="datetime-local">
 
 <label>Tags (comma separated)</label>
 <input id="tags" placeholder="tag1, tag2">
@@ -32,6 +40,7 @@
 <label>Thumbnail ALT</label>
 <input id="thumbAlt" placeholder="ALT text">
 
+<!-- TOOLBAR -->
 <div class="toolbar">
   <button onclick="cmd('bold')"><b>B</b></button>
   <button onclick="cmd('italic')"><i>I</i></button>
@@ -39,22 +48,27 @@
   <button onclick="heading('h2')">H2</button>
   <button onclick="heading('h3')">H3</button>
   <button onclick="heading('h4')">H4</button>
-  <button onclick="addLink()">Link</button>
-  <button onclick="addImage()">Image</button>
-  <button onclick="addButton()">Button</button>
+  <button onclick="addLink()">🔗</button>
+  <button onclick="addImage()">🖼</button>
+  <button onclick="addButton()">🔘</button>
 </div>
 
+<!-- EDITOR -->
 <div id="editor"
+     class="editor"
      contenteditable="true"
      spellcheck="true"
      lang="hi"
-     class="editor">
+     placeholder="Start writing your post...">
 </div>
 
+<!-- ACTIONS -->
 <div class="actions">
-  <button onclick="preview()">Preview</button>
-  <button onclick="saveLocal()">Save (posts.json)</button>
+  <button class="preview-btn" onclick="preview()">Preview</button>
+  <button class="save-btn" onclick="saveLocal()">Save posts.json</button>
 </div>
+
+</main>
 
 <script src="editor.js"></script>
 <script src="publish.js"></script>

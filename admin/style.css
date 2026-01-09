@@ -1,53 +1,113 @@
-body {
+* {
+  box-sizing: border-box;
   font-family: system-ui, sans-serif;
-  background: #f4f6f8;
-  padding: 20px;
 }
 
-h1 { margin-bottom: 15px }
+body {
+  margin: 0;
+  background: #f4f6f8;
+}
 
+/* HEADER */
+.admin-header {
+  background: #198754;
+  color: #fff;
+  padding: 14px;
+  text-align: center;
+}
+
+/* WRAPPER */
+.admin-wrap {
+  max-width: 900px;
+  margin: auto;
+  padding: 16px;
+}
+
+/* FORM */
 label {
   display: block;
-  margin-top: 12px;
+  margin-top: 14px;
   font-weight: 600;
 }
 
 input, select {
   width: 100%;
-  padding: 8px;
-  margin-top: 5px;
+  padding: 10px;
+  margin-top: 6px;
+  font-size: 16px;
 }
 
+/* TOOLBAR */
 .toolbar {
-  margin: 15px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 16px 0;
 }
 
 .toolbar button {
-  padding: 6px 10px;
-  margin-right: 5px;
-  cursor: pointer;
-}
-
-.editor {
-  background: #fff;
-  min-height: 320px;
-  padding: 15px;
+  padding: 8px 12px;
+  font-size: 14px;
   border: 1px solid #ccc;
+  background: #fff;
+  border-radius: 6px;
 }
 
-.editor h2 { font-size: 24px }
-.editor h3 { font-size: 21px }
-.editor h4 { font-size: 19px }
+/* EDITOR */
+.editor {
+  min-height: 320px;
+  background: #fff;
+  padding: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.editor h2 { font-size: 22px }
+.editor h3 { font-size: 20px }
+.editor h4 { font-size: 18px }
+
+.editor img {
+  max-width: 100%;
+  height: auto;
+}
 
 .editor .btn {
   display: inline-block;
-  background: #0d6efd;
+  background: #198754;
   color: #fff;
   padding: 8px 14px;
   border-radius: 6px;
   text-decoration: none;
 }
 
+/* ACTION BUTTONS */
 .actions {
+  display: flex;
+  gap: 10px;
   margin-top: 20px;
+}
+
+.actions button {
+  flex: 1;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+}
+
+.preview-btn {
+  background: #0d6efd;
+  color: #fff;
+}
+
+.save-btn {
+  background: #198754;
+  color: #fff;
+}
+
+/* MOBILE SAFE */
+@media (max-width: 600px) {
+  .toolbar button {
+    flex: 1 1 22%;
+  }
 }

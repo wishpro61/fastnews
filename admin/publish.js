@@ -7,6 +7,8 @@ async function preview() {
     .replace(/{{title}}/g, title.value)
     .replace(/{{thumbnail}}/g, thumbnail.value)
     .replace(/{{thumbAlt}}/g, thumbAlt.value)
+    .replace(/{{author}}/g, author.value)
+    .replace(/{{date}}/g, new Date(date.value).toLocaleDateString("hi-IN"))
     .replace(/{{content}}/g, editor.innerHTML);
 
   const w = window.open();
@@ -14,22 +16,20 @@ async function preview() {
   w.document.close();
 }
 
-/* Local posts.json update (manual git commit) */
 async function saveLocal() {
 
   const res = await fetch("/data/posts.json");
   const posts = await res.json();
 
-  const now = new Date();
-
   posts.unshift({
     title: title.value,
     slug: slug.value,
     category: category.value,
+    author: author.value,
+    date: new Date(date.value).toISOString(),
     tags: tags.value.split(",").map(t => t.trim()),
     thumbnail: thumbnail.value,
-    alt: thumbAlt.value,
-    date: now.toISOString()
+    alt: thumbAlt.value
   });
 
   const blob = new Blob(
@@ -42,5 +42,5 @@ async function saveLocal() {
   a.download = "posts.json";
   a.click();
 
-  alert("posts.json downloaded — replace it & git commit");
+  alert("posts.json downloaded – git commit ready");
 }
