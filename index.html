@@ -6,26 +6,30 @@
 
   <title>NcertCollege – सरकारी योजनाएं, नौकरियां और शिक्षा</title>
 
-  <!-- SEO -->
+  <!-- ================= SEO ================= -->
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="NcertCollege पर सरकारी योजनाएं, सरकारी नौकरी, शिक्षा और ताजा खबरें पढ़ें।" />
-  <meta name="robots" content="noindex, nofollow" />
+  <meta name="description" content="NcertCollege पर सरकारी योजनाएं, सरकारी नौकरियां, शिक्षा समाचार और लेटेस्ट अपडेट पढ़ें।" />
+  <meta name="robots" content="index, follow" />
 
-  <!-- ====== FAVICON & ICONS ====== -->
-<link rel="icon" href="/assets/images/icons/favicon.ico" sizes="any">
-<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/icons/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/icons/favicon-32x32.png">
+  <!-- ================= FAVICON & ICONS ================= -->
+  <link rel="icon" href="/assets/images/icons/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/icons/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/icons/favicon-32x32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/icons/apple-touch-icon.png" />
 
-<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/icons/apple-touch-icon.png">
-
-  <!-- PWA -->
+  <!-- ================= PWA ================= -->
   <link rel="manifest" href="/manifest.json" />
   <meta name="theme-color" content="#0d6efd" />
 
-  <!-- CSS -->
+  <!-- ================= PERFORMANCE ================= -->
+  <!-- Preload LCP Image (Hero) -->
+  <link rel="preload" as="image" href="/assets/images/news/free-laptop.webp" />
+
+  <!-- CSS (Non-blocking) -->
+  <link rel="preload" href="/assets/css/style.css" as="style" />
   <link rel="stylesheet" href="/assets/css/style.css" />
 
-  <!-- JS -->
+  <!-- ================= JS (DEFERRED) ================= -->
   <script defer src="/assets/js/include.js"></script>
   <script defer src="/assets/js/search.js"></script>
   <script defer src="/assets/js/main.js"></script>
@@ -33,41 +37,50 @@
 
 <body>
 
-<!-- ================= HEADER ================= -->
-<div data-include="/partials/header.html"></div>
+  <!-- ================= HEADER ================= -->
+  <div data-include="/partials/header.html" style="min-height:64px;"></div>
 
-<!-- ================= JOIN BOX ================= -->
-<section class="join-box">
-  <h2 class="visually-hidden">Join Our Channels</h2>
+  <!-- ================= JOIN BOX ================= -->
+  <section class="join-box">
+    <h2 class="visually-hidden">Join Our Channels</h2>
 
-  <div class="join whatsapp">
-    <span>Join WhatsApp</span>
-    <a href="https://whatsapp.com/channel/0029VaSQUV" class="btn green">
-      Join Now
-    </a>
-  </div>
+    <div class="join whatsapp">
+      <span>Join WhatsApp</span>
+      <a
+        href="https://whatsapp.com/channel/0029VaSQUVXXXXXX"
+        rel="noopener"
+        target="_blank"
+      >
+        Join Now
+      </a>
+    </div>
 
-  <div class="join telegram">
-    <span>Join Telegram</span>
-    <a href="#" class="btn blue">
-      Join Now
-    </a>
-  </div>
-</section>
+    <div class="join telegram">
+      <span>Join Telegram</span>
+      <a
+        href="#"
+        class="btn blue"
+        rel="noopener"
+        target="_blank"
+      >
+        Join Now
+      </a>
+    </div>
+  </section>
 
-<!-- ================= HOME CONTENT ================= -->
-<main class="container" id="homeCategories">
-  <!-- Categories + posts JS से load होंगे -->
-</main>
+  <!-- ================= HOME CONTENT ================= -->
+  <main class="container" id="homeCategories">
+    <!-- Categories & posts JS se load honge -->
+  </main>
 
-<!-- ================= COMMON ================= -->
-<div data-include="/partials/common-section.html"></div>
+  <!-- ================= COMMON SECTION ================= -->
+  <div data-include="/partials/common-section.html"></div>
 
-<!-- ================= FOOTER ================= -->
-<div data-include="/partials/footer.html"></div>
+  <!-- ================= FOOTER ================= -->
+  <div data-include="/partials/footer.html"></div>
 
-<!-- ================= PUSH ================= -->
-<script type="module" src="/push.js"></script>
+  <!-- ================= PUSH NOTIFICATIONS ================= -->
+  <script type="module" src="/push.js"></script>
 
 </body>
 </html>
