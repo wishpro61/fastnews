@@ -56,6 +56,18 @@
       <time datetime="2025-12-01">1 December 2025</time>
     </div>
   </div>
+<!-- Fixed Ad Start -->
+<div id="ad-container"></div>
+
+<script>
+  fetch("/ads/fixed-ad.html")
+    .then(response => response.text())
+    .then(html => {
+      document.getElementById("ad-container").innerHTML = html;
+    })
+    .catch(err => console.error("Ad load error:", err));
+</script>
+<!-- Fixed Ad End -->
 
   <!-- TITLE -->
   <h1 class="post-title">
