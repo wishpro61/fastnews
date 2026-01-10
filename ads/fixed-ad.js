@@ -1,11 +1,17 @@
-function toggleOptions() {
-  document.getElementById("adOptions").style.display =
-    document.getElementById("adOptions").style.display === "block" ? "none" : "block";
-  document.getElementById("adInfo").style.display = "none";
+<script>
+function openAdMenu() {
+  toggleBox("adMenu", "adInfo");
 }
 
-function toggleInfo() {
-  document.getElementById("adInfo").style.display =
-    document.getElementById("adInfo").style.display === "block" ? "none" : "block";
-  document.getElementById("adOptions").style.display = "none";
+function openAdInfo() {
+  toggleBox("adInfo", "adMenu");
 }
+
+function toggleBox(showId, hideId) {
+  const show = document.getElementById(showId);
+  const hide = document.getElementById(hideId);
+
+  show.style.display = show.style.display === "block" ? "none" : "block";
+  hide.style.display = "none";
+}
+</script>
