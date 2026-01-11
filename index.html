@@ -41,6 +41,13 @@
 
   <!-- ================= HEADER ================= -->
   <div data-include="/partials/header.html" style="min-height:64px;"></div>
+<!-- ==========ADS=========---->
+<div id="ad-area"></div>
+<script>
+fetch('/ads/fixed-ad.html')
+.then(r=>r.text())
+.then(d=>document.getElementById('ad-area').innerHTML=d);
+</script>
 
   <!-- ================= JOIN BOX ================= -->
   <section class="join-box">

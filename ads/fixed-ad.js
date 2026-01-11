@@ -1,17 +1,23 @@
-<script>
-function openAdMenu() {
-  toggleBox("adMenu", "adInfo");
+function openMenu() {
+  document.getElementById("menu").style.display = "block";
 }
 
-function openAdInfo() {
-  toggleBox("adInfo", "adMenu");
+function hideAd() {
+  document.getElementById("menu").style.display = "none";
+  document.getElementById("mainAd").style.display = "none";
+  document.getElementById("thanks").style.display = "block";
 }
 
-function toggleBox(showId, hideId) {
-  const show = document.getElementById(showId);
-  const hide = document.getElementById(hideId);
-
-  show.style.display = show.style.display === "block" ? "none" : "block";
-  hide.style.display = "none";
+function feedback() {
+  hideAd();
 }
-</script>
+
+function showAd() {
+  document.getElementById("mainAd").style.display = "flex";
+  document.getElementById("menu").style.display = "none";
+  document.getElementById("thanks").style.display = "none";
+}
+
+function openWhyAd() {
+  window.open("https://adssettings.google.com/whythisad", "_blank");
+}

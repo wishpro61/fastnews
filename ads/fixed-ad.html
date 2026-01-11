@@ -1,27 +1,53 @@
-<div class="ad-image-wrap">
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<title>Sponsored Ad</title>
+<link rel="stylesheet" href="fixed-ad.css">
+</head>
+<body>
 
-  <!-- Corner Icons -->
-  <div class="ad-corner-icons">
-    <span class="ad-icon" onclick="openAdMenu()">⋮</span>
-    <span class="ad-icon" onclick="openAdInfo()">ⓘ</span>
+<div class="ad-container" id="adBox">
+
+  <!-- Top bar -->
+  <div class="ad-top">
+    <span class="back-arrow" onclick="showAd()">←</span>
+    <div class="ad-icons">
+      <span onclick="openWhyAd()">∆</span>
+      <span onclick="openMenu()">⋮</span>
+    </div>
   </div>
 
-  <!-- REAL AD IMAGE (RED FORMAT JAISE) -->
-  <a href="#" target="_blank" rel="nofollow sponsored">
-    <img src="red-ad-banner.jpg" alt="Advertisement">
-  </a>
-
-  <!-- Action Menu (dusri image jaisa) -->
-  <div class="ad-box" id="adMenu">
-    <a href="#">विज्ञापन अनुचित था</a>
-    <a href="#">इस विज्ञापन में रुचि नहीं</a>
-    <a href="#">यह विज्ञापन कई बार देखा</a>
+  <!-- Main Ad -->
+  <div class="ad-main" id="mainAd">
+    <img src="/assets/ads.png" class="ad-ads" alt="logo">
+    <div class="ad-text">
+      <h3>Apply Online Today</h3>
+      <p>
+        International Exposure | A Dynamic Course<br>
+        for Future Leaders | Highest Package 75 LPA
+      </p>
+      <a href="https://www.kluniversity.in/admissions-2026/?utm_source=Google+Ads&utm_medium=NorthIndia&utm_campaign=PMAX-KLU-PMAX-2026&gad_source=5&gad_campaignid=22366164122&gclid=CjwKCAiAjojLBhAlEiwAcjhrDt7XlVsPrIwuHWAmjH_bxml-35vgZFuSV-EWqtwOVWl7ynfw6BB17xoC5cgQAvD_BwE"
+         target="_blank" class="apply-btn">Apply Now</a>
+    </div>
   </div>
 
-  <!-- Info Box -->
-  <div class="ad-box" id="adInfo">
-    <p>Google आपकी गतिविधि के आधार पर विज्ञापन दिखाता है</p>
-    <a href="#">फीडबैक भेजें</a>
+  <!-- Menu -->
+  <div class="ad-menu" id="menu">
+    <button onclick="feedback()">फीडबैक भेजें</button>
+    <button onclick="hideAd()">विज्ञापन अनुचित था</button>
+    <button onclick="hideAd()">इस विज्ञापन में रुचि नहीं</button>
+    <button onclick="hideAd()">यह विज्ञापन कई बार देखा</button>
+    <button onclick="hideAd()">विज्ञापन में कवर सामग्री</button>
+  </div>
+
+  <!-- Thanks -->
+  <div class="ad-thanks" id="thanks">
+    धन्यवाद, आपके सुझावों से हमें मदद मिलती है
   </div>
 
 </div>
+
+<script src="fixed-ad.js"></script>
+</body>
+</html>
