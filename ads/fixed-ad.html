@@ -7,43 +7,53 @@
 </head>
 <body>
 
-<div class="ad-container" id="adBox">
+<div class="ad-wrapper">
 
-  <!-- Top bar -->
-  <div class="ad-top">
-    <span class="back-arrow" onclick="showAd()">←</span>
-    <div class="ad-icons">
-      <span onclick="openWhyAd()">∆</span>
-      <span onclick="openMenu()">⋮</span>
+  <div class="ad-container" id="adBox">
+
+    <!-- Top Bar -->
+    <div class="ad-top">
+      <span class="back-arrow" onclick="showAd()">←</span>
+
+      <div class="ad-icons">
+        <span class="info-icon" onclick="openWhyAd()">ℹ</span>
+        <span class="menu-icon" onclick="openMenu()">⋮</span>
+      </div>
     </div>
-  </div>
 
-  <!-- Main Ad -->
-  <div class="ad-main" id="mainAd">
-    <img src="/assets/ads.png" class="ad-ads" alt="logo">
-    <div class="ad-text">
-      <h3>Apply Online Today</h3>
-      <p>
-        International Exposure | A Dynamic Course<br>
-        for Future Leaders | Highest Package 75 LPA
-      </p>
-      <a href="https://www.kluniversity.in/admissions-2026/?utm_source=Google+Ads&utm_medium=NorthIndia&utm_campaign=PMAX-KLU-PMAX-2026&gad_source=5&gad_campaignid=22366164122&gclid=CjwKCAiAjojLBhAlEiwAcjhrDt7XlVsPrIwuHWAmjH_bxml-35vgZFuSV-EWqtwOVWl7ynfw6BB17xoC5cgQAvD_BwE"
-         target="_blank" class="apply-btn">Apply Now</a>
+    <!-- Main Ad -->
+    <div class="ad-main" id="mainAd">
+      <img src="/assets/ads.png" class="ad-logo" alt="logo">
+
+      <div class="ad-text">
+        <h3>Apply Online Today</h3>
+        <p>
+          International Exposure | A Dynamic Course<br>
+          for Future Leaders | Highest Package 75 LPA
+        </p>
+
+        <a class="apply-btn"
+           href="https://www.kluniversity.in/admissions-2026/?utm_source=Google+Ads&utm_medium=NorthIndia&utm_campaign=PMAX-KLU-PMAX-2026&gad_source=5&gad_campaignid=22366164122&gclid=CjwKCAiAjojLBhAlEiwAcjhrDt7XlVsPrIwuHWAmjH_bxml-35vgZFuSV-EWqtwOVWl7ynfw6BB17xoC5cgQAvD_BwE"
+           target="_blank">
+           Apply Now
+        </a>
+      </div>
     </div>
-  </div>
 
-  <!-- Menu -->
-  <div class="ad-menu" id="menu">
-    <button onclick="feedback()">फीडबैक भेजें</button>
-    <button onclick="hideAd()">विज्ञापन अनुचित था</button>
-    <button onclick="hideAd()">इस विज्ञापन में रुचि नहीं</button>
-    <button onclick="hideAd()">यह विज्ञापन कई बार देखा</button>
-    <button onclick="hideAd()">विज्ञापन में कवर सामग्री</button>
-  </div>
+    <!-- Menu -->
+    <div class="ad-menu" id="menu">
+      <button onclick="hideAd()">विज्ञापन अनुचित था</button>
+      <button onclick="hideAd()">इस विज्ञापन में रुचि नहीं</button>
+      <button onclick="hideAd()">यह विज्ञापन कई बार देखा</button>
+      <button onclick="hideAd()">विज्ञापन में कवर सामग्री</button>
+      <button onclick="feedback()">फीडबैक भेजें</button>
+    </div>
 
-  <!-- Thanks -->
-  <div class="ad-thanks" id="thanks">
-    धन्यवाद, आपके सुझावों से हमें मदद मिलती है
+    <!-- Thanks -->
+    <div class="ad-thanks" id="thanks">
+      धन्यवाद, आपके सुझावों से हमें मदद मिलती है
+    </div>
+
   </div>
 
 </div>

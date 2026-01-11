@@ -1,36 +1,50 @@
 body {
-  background:#eef2f3;
+  margin: 0;
+  background: #eef2f3;
   font-family: Arial, sans-serif;
 }
 
-.ad-container {
-  width: 320px;
-  background: #fff;
-  border: 3px solid #b71c1c;
-  position: relative;
-  box-shadow: 0 0 10px rgba(0,0,0,.3);
+.ad-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
 }
 
-/* Top */
+/* Ad Box */
+.ad-container {
+  width: 330px;
+  background: #fff;
+  border: 3px solid #b71c1c;
+  box-shadow: 0 4px 12px rgba(0,0,0,.25);
+}
+
+/* Top bar */
 .ad-top {
   display: flex;
   justify-content: space-between;
-  padding: 6px;
-  font-size: 14px;
+  align-items: center;
+  padding: 6px 8px;
 }
 
 .back-arrow {
+  font-size: 18px;
+  color: #5f6368;
   cursor: pointer;
-  color: #666;
 }
 
-.ad-icons span {
-  margin-left: 10px;
-  cursor: pointer;
+.ad-icons {
+  display: flex;
+  gap: 12px;
+}
+
+.info-icon,
+.menu-icon {
+  font-size: 18px;
   color: #1a73e8;
+  cursor: pointer;
 }
 
-/* Main */
+/* Main Ad */
 .ad-main {
   display: flex;
   padding: 15px;
@@ -39,27 +53,31 @@ body {
 .ad-logo {
   width: 40px;
   height: 40px;
+  object-fit: contain;
   margin-right: 10px;
 }
 
+/* Text */
 .ad-text h3 {
   margin: 0;
   font-size: 18px;
 }
 
 .ad-text p {
+  margin: 5px 0 10px;
   font-size: 13px;
   color: #555;
 }
 
+/* Button */
 .apply-btn {
   display: inline-block;
-  margin-top: 10px;
   background: #000;
   color: #fff;
-  padding: 8px 15px;
+  padding: 8px 16px;
   text-decoration: none;
-  border-radius: 3px;
+  border-radius: 4px;
+  font-size: 14px;
 }
 
 /* Menu */
@@ -70,11 +88,12 @@ body {
 
 .ad-menu button {
   width: 100%;
+  padding: 8px;
   margin: 4px 0;
-  padding: 6px;
-  border: 1px solid #ddd;
-  background: #f5f5f5;
+  background: #f1f3f4;
+  border: 1px solid #dadce0;
   cursor: pointer;
+  text-align: left;
 }
 
 /* Thanks */
